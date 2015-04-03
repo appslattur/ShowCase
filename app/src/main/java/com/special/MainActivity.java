@@ -14,8 +14,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     private ResideMenu resideMenu;
     private ResideMenuItem itemHome;
-    private ResideMenuItem itemElements;
-    private ResideMenuItem itemList1;
     private ResideMenuItem itemList2;
   
     @Override
