@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.special.appslattur.DatabaseHelper.TestHandler;
 import com.special.menu.ResideMenu;
 import com.special.menu.ResideMenuItem;
 
@@ -22,7 +23,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         setContentView(R.layout.activity_main);
         setUpMenu();
         changeFragment(new HomeFragment());
-        
+        TestHandler.initHandler(getBaseContext());
     }
 
     private void setUpMenu() {

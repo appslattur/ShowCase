@@ -5,11 +5,14 @@ import com.special.R;
 /**
  * Created by Ari on 2.4.2015.
  */
-public class LogoMatcher {
+public final class LogoMatcher {
+    private LogoMatcher(){}
+
 
     public static int getLogoResourceByName(String name){
 
         String s = String.valueOf(name);
+
         if (s.equals("Serranó")) {
             return R.drawable.serrano;
 
@@ -28,9 +31,12 @@ public class LogoMatcher {
         else if(s.equals("Subway")){
             return R.drawable.subway;
         }
+        else if(s.equals("Tölvutek")){
+            return R.drawable.tolvutek;
+        }
 
 
-        return  R.drawable.ph_1;
+        return  R.drawable.nologo;
     }
 
 }

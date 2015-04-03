@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.special.appslattur.DatabaseHelper.DataBaseHelper;
+import com.special.appslattur.DatabaseHelper.TestHandler;
 import com.special.appslattur.LocationChainStructure.LocationChain;
 import com.special.appslattur.Tools.LogoMatcher;
 import com.special.menu.ResideMenu;
@@ -31,8 +32,8 @@ public class TransitionListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        dbHelper = new DataBaseHelper(this.getActivity().getBaseContext());
-        dbHelper.refreshTable();
+        //dbHelper = new DataBaseHelper(this.getActivity().getBaseContext());
+        //dbHelper.refreshTable();
         parentView = inflater.inflate(R.layout.fragment_list_transition, container, false);
         listView   = (UISwipableList) parentView.findViewById(R.id.listView);
         MainActivity parentActivity = (MainActivity) getActivity();
@@ -85,11 +86,15 @@ public class TransitionListFragment extends Fragment {
 
     private ArrayList<ListItem> getListData(){
         //Hér þarf að setja inn DataBaseHelper
-        ArrayList<LocationChain> lChain = dbHelper.getLocationList();
+        ArrayList<LocationChain> lChain = TestHandler.getLocations();
         ArrayList<ListItem> listData = new ArrayList<ListItem>();
-        LogoMatcher matcher = new LogoMatcher();
+        //LogoMatcher matcher = new LogoMatcher();
         for(LocationChain lc : lChain){
-            listData.add(new ListItem(matcher.getLogoResourceByName(lc.getName()), lc.getName(), dbHelper.getShortDescById(lc.getID()), lc.getID()));
+            listData.add(new ListItem(
+                    LogoMatcher.getLogoResourceByName(lc.getName()),
+                    lc.getName(),
+                    TestHandler.getShortDescById(lc.getID()),
+                    lc.getID()));
         }
 
        /*
