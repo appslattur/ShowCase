@@ -14,7 +14,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     private ResideMenu resideMenu;
     private ResideMenuItem itemHome;
-    private ResideMenuItem itemList2;
+    private ResideMenuItem afslaettirList;
   
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,18 +42,18 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         //itemList1 = new ResideMenuItem(this, R.drawable.ic_list_2, "List 1");
 
         //Þetta verður listi með okkar afsláttum
-        itemList2 = new ResideMenuItem(this, R.drawable.ic_list_1, "List 2");
+        afslaettirList = new ResideMenuItem(this, R.drawable.ic_list_1, "Afslættir");
 
         itemHome.setOnClickListener(this);
         //itemElements.setOnClickListener(this);
         //itemList1.setOnClickListener(this);
 
-        itemList2.setOnClickListener(this);
+        afslaettirList.setOnClickListener(this);
 
         resideMenu.addMenuItem(itemHome);
         //resideMenu.addMenuItem(itemElements);
         //resideMenu.addMenuItem(itemList1);
-        resideMenu.addMenuItem(itemList2);
+        resideMenu.addMenuItem(afslaettirList);
         
         findViewById(R.id.title_bar_left_menu).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +84,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             changeFragment(new ListFragment());
         }
         */
-        else if (view == itemList2){
+        else if (view == afslaettirList){
             changeFragment(new TransitionListFragment());
         }
 

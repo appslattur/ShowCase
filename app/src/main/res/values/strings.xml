@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Clear UI</string>
+    <string name="app_name">Appsláttur</string>
     <string name="title_activity_detail_view">DetailView</string>
     <string name="button_placeholder_text">Button</string>
     <string name="checkbox">CheckBox</string>
