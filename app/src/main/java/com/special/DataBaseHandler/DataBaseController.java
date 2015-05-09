@@ -229,24 +229,24 @@ public class DataBaseController {
     private EntryMessage manageInsertion(EntryMessage message) {
 
         String report = "";
-    /*
+
         for(EntryStamp stamp : message.getStamps()) {
 
-            switch (stamp.getSubType()) {
-                case DataStamp.ENTRYSTAMP_TYPE_FS:
-                    report += insertFSEntry(stamp);
-                    break;
-                case DataStamp.ENTRYSTAMP_TYPE_FSMG:
-                    report += insertFSMGEntry(stamp);
-                    break;
-                default:
-                    report += "Failed to insert entry w. id : " + stamp.getId() +
-                            " and w. type : " + stamp.getSubType() + " - not recognized" + "\n";
+            if(stamp.getSubType().equals(DataStamp.ENTRYSTAMP_TYPE_FS)) {
+                report += insertFSEntry(stamp);
+            }
+            else if(stamp.getSubType().equals(DataStamp.ENTRYSTAMP_TYPE_FSMG)) {
+                report += insertFSMGEntry(stamp);
+            }
+            else {
+                report += "Failed to insert entry w. id : " + stamp.getId() +
+                        " and w. type : " + stamp.getSubType() + " - not recognized" + "\n";
             }
 
         }
-    */
+
         return new EntryMessage(report, false);
+
     }
 
     ///
@@ -366,61 +366,51 @@ public class DataBaseController {
         Cursor cursor;
         // TODO: FIX AFTER JDK UPDATE
         ValueStamp stamp = null;
-        /*
-        switch (message.getLocation()) {
-            case ValueMessage.VALUEMESSAGE_LOCATION_FS:
-                cursor = db.query(DataBaseHelper.FS_TABLE_NAME,
-                        null,
-                        FS_allColumns[0] + " = ?",
-                        new String[] { message.getId()+""},
-                        null,
-                        null,
-                        null
-                );
 
-                cursor.moveToFirst();
-
-                stamp = extractFSEntry(cursor);
-
-                break;
-            case ValueMessage.VALUEMESSAGE_LOCATION_FSMG:
-                cursor = db.query(DataBaseHelper.FSMG_TABLE_NAME,
-                        null,
-                        FSMG_allColumns[0] + " = ?",
-                        new String[] { message.getId()+""},
-                        null,
-                        null,
-                        null
-                );
-
-                cursor.moveToFirst();
-
-                stamp = extractFSMGEntry(cursor);
-
-                break;
-            default:
-                return new ValueMessage("Failure to recognize ValueMessage location", true);
+        if(message.getLocation().equals(ValueMessage.VALUEMESSAGE_LOCATION_FS)) {
+            cursor = db.query(DataBaseHelper.FS_TABLE_NAME,
+                    null,
+                    FS_allColumns[0] + " = ?",
+                    new String[] { message.getId()+""},
+                    null,
+                    null,
+                    null
+            );
+        }
+        else if(message.getLocation().equals(ValueMessage.VALUEMESSAGE_LOCATION_FSMG)) {
+            cursor = db.query(DataBaseHelper.FSMG_TABLE_NAME,
+                    null,
+                    FSMG_allColumns[0] + " = ?",
+                    new String[] { message.getId()+""},
+                    null,
+                    null,
+                    null
+            );
+        }
+        else {
+            return new ValueMessage("Failure to recognize ValueMessage location", true);
         }
 
-        cursor.close();
-        */
+        if(cursor.moveToFirst()) {
+            stamp = extractFSMGEntry(cursor);
+        }
+
         return new ValueMessage(stamp);
 
     }
 
     private ValueMessage manageExtraction(ValueMessage message) {
-    /*
-        switch (message.getType()) {
-            case ValueMessage.VALUEMESSAGE_TYPE_SINGLE:
-                return manageSingleExtraction(message);
-            case ValueMessage.VALUEMESSAGE_TYPE_MULTIPLE:
-                return manageMassExtraction();
-            default:
-                return new ValueMessage("Message subtype not recognized - manageExtraction -- subType value", true);
 
+        if(message.getType().equals(ValueMessage.VALUEMESSAGE_TYPE_SINGLE)) {
+            return manageSingleExtraction(message);
         }
-    */
-        return null;
+        else if(message.getType().equals(ValueMessage.VALUEMESSAGE_TYPE_MULTIPLE)) {
+            return manageMassExtraction();
+        }
+        else {
+            return new ValueMessage("Message subtype not recognized - manageExtraction -- subType value", true);
+        }
+
     }
 
     ///
@@ -626,17 +616,17 @@ public class DataBaseController {
 
 
     private IterableMessage manageIterables(IterableMessage message) {
-    /*
-        switch (message.getType()) {
-            case IterableMessage.ITERABLEMESSAGE_TYPE_RADAR:
-                return fetchRadarIterables();
-            case IterableMessage.ITERABLEMESSAGE_TYPE_DISPLAY:
-                return fetchDisplayIterables(message);
-            default:
-                return new IterableMessage("Message subtype not recognized  - manageIterables -- subType Iterable", true);
+
+        if(message.getType().equals(IterableMessage.ITERABLEMESSAGE_TYPE_RADAR)) {
+            return fetchRadarIterables();
         }
-        */
-        return null;
+        else if(message.getType().equals(IterableMessage.ITERABLEMESSAGE_TYPE_DISPLAY)) {
+            return fetchDisplayIterables(message);
+        }
+        else {
+            return new IterableMessage("Message subtype not recognized  - manageIterables -- subType Iterable", true);
+        }
+
     }
 
     ///
@@ -644,119 +634,116 @@ public class DataBaseController {
     ///
 
     private UpdateMessage manageUtilities(UpdateMessage message) {
-        /*
-        switch (message.getSubType()) {
-            case UpdateMessage.UPDATEMESSAGE_UTILTYPE_COUNT:
-                return new UpdateMessage(isEmpty());
-            default:
-                return new UpdateMessage("message type not recognized - manageUtilities", true);
+
+        if(message.getSubType().equals(UpdateMessage.UPDATEMESSAGE_UTILTYPE_COUNT)) {
+            return new UpdateMessage(isEmpty());
         }
-        */
-        return null;
+        else {
+            return new UpdateMessage("message type not recognized - manageUtilities", true);
+        }
+
     }
 
     private UpdateMessage updateEnableName(UpdateMessage message) {
 
         ContentValues values = new ContentValues();
-    /*
-        switch (message.getLocation()) {
-            case UpdateMessage.UPDATEMESSAGE_LOCATION_FS:
+        boolean worked = false;
 
-                values.put(FS_allColumns[9], message.getNewEntity());
+        if(message.getLocation().equals(UpdateMessage.UPDATEMESSAGE_LOCATION_FS)) {
+            values.put(FS_allColumns[9], message.getNewEntity());
 
-                db.update(
-                        DataBaseHelper.FS_TABLE_NAME,
-                        values,
-                        FS_allColumns[5] + " = ?",
-                        new String[] { message.getName() }
-                );
-
-                break;
-            case UpdateMessage.UPDATEMESSAGE_LOCATION_FSMG:
-
-                values.put(FSMG_allColumns[4], message.getNewEntity());
-
-                db.update(
-                        DataBaseHelper.FSMG_TABLE_NAME,
-                        values,
-                        FSMG_allColumns[3] + " = ?",
-                        new String[] { message.getName() }
-                );
-
-                break;
-            default:
-                return new UpdateMessage("UpdateMessage location not recognized, updateEnableName", true);
+            db.update(
+                    DataBaseHelper.FS_TABLE_NAME,
+                    values,
+                    FS_allColumns[5] + " = ?",
+                    new String[] { message.getName() }
+            );
+            worked = true;
         }
-        */
+        else if(message.getLocation().equals(UpdateMessage.UPDATEMESSAGE_LOCATION_FSMG)) {
+            values.put(FSMG_allColumns[4], message.getNewEntity());
+
+            db.update(
+                    DataBaseHelper.FSMG_TABLE_NAME,
+                    values,
+                    FSMG_allColumns[3] + " = ?",
+                    new String[] { message.getName() }
+            );
+            worked = true;
+        }
+        else {
+            worked = false;
+        }
+
         values.clear();
 
-        return new UpdateMessage(false);
+        return new UpdateMessage(worked);
+
     }
 
     private UpdateMessage updateEnableId(UpdateMessage message) {
 
         ContentValues values = new ContentValues();
-    /*
-        switch (message.getLocation()) {
-            case UpdateMessage.UPDATEMESSAGE_LOCATION_FS:
+        boolean worked;
 
-                values.put(FS_allColumns[9], message.getNewEntity());
+        if(message.getLocation().equals(UpdateMessage.UPDATEMESSAGE_LOCATION_FS)) {
+            values.put(FS_allColumns[9], message.getNewEntity());
 
-                db.update(
-                        DataBaseHelper.FS_TABLE_NAME,
-                        values,
-                        FS_allColumns[0] + " = ?",
-                        new String[] { message.getId()+"" }
-                );
-
-                break;
-            case UpdateMessage.UPDATEMESSAGE_LOCATION_FSMG:
-
-                values.put(FSMG_allColumns[4], message.getNewEntity());
-
-                db.update(
-                        DataBaseHelper.FSMG_TABLE_NAME,
-                        values,
-                        FSMG_allColumns[0] + " = ?",
-                        new String[] { message.getId()+"" }
-                );
-
-                break;
-            default:
-                return new UpdateMessage("UpdateMessage location not recognized, updateEnableId", true);
+            db.update(
+                    DataBaseHelper.FS_TABLE_NAME,
+                    values,
+                    FS_allColumns[0] + " = ?",
+                    new String[] { message.getId()+"" }
+            );
+            worked = true;
         }
-    */
+        else if(message.getLocation().equals(UpdateMessage.UPDATEMESSAGE_LOCATION_FSMG)) {
+            values.put(FSMG_allColumns[4], message.getNewEntity());
+
+            db.update(
+                    DataBaseHelper.FSMG_TABLE_NAME,
+                    values,
+                    FSMG_allColumns[0] + " = ?",
+                    new String[] { message.getId()+"" }
+            );
+            worked = true;
+        }
+        else {
+            worked = false;
+        }
+
         values.clear();
 
-        return new UpdateMessage(false);
+        return new UpdateMessage(worked);
+
     }
 
     private UpdateMessage updateTables(UpdateMessage message) {
-    /*
-        switch (message.getSubType()) {
-            case UpdateMessage.UPDATEMESSAGE_SUBTYPE_ENABLEID:
-                return updateEnableId(message);
-            case UpdateMessage.UPDATEMESSAGE_SUBTYPE_ENABLENAME:
-                return updateEnableName(message);
-            default:
-                return new UpdateMessage("UpdateMessage subType not recognized, updateTables", true);
+
+        if(message.getSubType().equals(UpdateMessage.UPDATEMESSAGE_SUBTYPE_ENABLEID)) {
+            return updateEnableId(message);
         }
-        */
-        return null;
+        else if(message.getSubType().equals(UpdateMessage.UPDATEMESSAGE_SUBTYPE_ENABLENAME)) {
+            return updateEnableName(message);
+        }
+        else {
+            return new UpdateMessage("UpdateMessage subType not recognized, updateTables", true);
+        }
+
     }
 
     private UpdateMessage manageUpdates(UpdateMessage message) {
-        /*
-        switch (message.getType()) {
-            case UpdateMessage.UPDATEMESSAGE_TYPE_UPDATE:
-                return updateTables(message);
-            case UpdateMessage.UPDATEMESSAGE_TYPE_UTIL:
-                return manageUtilities(message);
-            default:
-                return new UpdateMessage("Message type not recognized - manageUpdates", true);
+
+        if(message.getType().equals(UpdateMessage.UPDATEMESSAGE_TYPE_UPDATE)) {
+            return updateTables(message);
         }
-        */
-        return null;
+        else if(message.getType().equals(UpdateMessage.UPDATEMESSAGE_TYPE_UTIL)) {
+            return manageUtilities(message);
+        }
+        else {
+            return new UpdateMessage("Message type not recognized - manageUpdates", true);
+        }
+
     }
 
 
