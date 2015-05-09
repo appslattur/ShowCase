@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import com.special.DataBaseHandler.AsyncTasks.ValueTask;
+import com.special.DataStorage.Instances.ValueStamp;
+import com.special.DataStorage.Messages.ValueMessage;
 import com.special.appslattur.DatabaseHelper.DataBaseHelper;
 import com.special.appslattur.DatabaseHelper.TestHandler;
 import com.special.appslattur.LocationChainStructure.LocationChain;
@@ -88,29 +91,21 @@ public class TransitionListFragment extends Fragment {
         //Hér þarf að setja inn DataBaseHelper
         ArrayList<LocationChain> lChain = TestHandler.getLocations();
         ArrayList<ListItem> listData = new ArrayList<ListItem>();
-        //LogoMatcher matcher = new LogoMatcher();
-        for(LocationChain lc : lChain){
-            listData.add(new ListItem(
-                    LogoMatcher.getLogoResourceByName(lc.getName()),
-                    lc.getName(),
-                    TestHandler.getShortDescById(lc.getID()),
-                    lc.getID()));
+
+        try{
+            ValueMessage data = new ValueTask(this.getActivity().getBaseContext()).execute(new ValueMessage()).get();
+            for(ValueStamp info : data.getStamps()){
+                listData.add(new ListItem(
+                        LogoMatcher.getLogoResourceByName(info.getName()),
+                        info.getName(),
+                        info.getShortDescription(),
+                        info.getId()
+                ));
+            }
+        }catch(Exception e){
+
         }
 
-       /*
-        listData.add(new ListItem(R.drawable.ph_1, "Henry Smith", "Vacation!", null, null));
-        listData.add(new ListItem(R.drawable.ph_2, "Martinez", "Still exited from my trip last week!", null, null));
-        listData.add(new ListItem(R.drawable.ph_3, "Olivier Smith", "Visiting Canada next week!", null, null));
-        listData.add(new ListItem(R.drawable.ph_4, "Aria Thompson", "Can not go shopping tomorrow :(", null, null));
-        listData.add(new ListItem(R.drawable.ph_5, "Sophie Hill", "Live every day like it is the last one!", null, null));
-        listData.add(new ListItem(R.drawable.ph_6, "Addison Adams", "Not available, working...", null, null));
-        listData.add(new ListItem(R.drawable.ph_7, "Harper Clark", "Whats up?", null, null));
-        listData.add(new ListItem(R.drawable.ph_8, "Micheal Green", "Guess who has to work? Pfff..", null, null));
-        listData.add(new ListItem(R.drawable.ph_9, "Benjamin Lewis", "Playing games all week", null, null));
-        listData.add(new ListItem(R.drawable.ph_10, "Luke Wilson", "Anybody got any plans for this weekend?", null, null));
-        listData.add(new ListItem(R.drawable.ph_11, "Daniel Moore", "Going to the movies, so do not call me :)", null, null));
-        listData.add(new ListItem(R.drawable.ph_12, "Ella Smith", "Going on a trip with the family next week!", null, null));
-        */
         return listData;
     }
 }
