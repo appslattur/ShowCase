@@ -229,7 +229,7 @@ public class DataBaseController {
     private EntryMessage manageInsertion(EntryMessage message) {
 
         String report = "";
-
+    /*
         for(EntryStamp stamp : message.getStamps()) {
 
             switch (stamp.getSubType()) {
@@ -245,7 +245,7 @@ public class DataBaseController {
             }
 
         }
-
+    */
         return new EntryMessage(report, false);
     }
 
@@ -364,8 +364,9 @@ public class DataBaseController {
     private ValueMessage manageSingleExtraction(ValueMessage message) {
 
         Cursor cursor;
-        ValueStamp stamp;
-
+        // TODO: FIX AFTER JDK UPDATE
+        ValueStamp stamp = null;
+        /*
         switch (message.getLocation()) {
             case ValueMessage.VALUEMESSAGE_LOCATION_FS:
                 cursor = db.query(DataBaseHelper.FS_TABLE_NAME,
@@ -402,13 +403,13 @@ public class DataBaseController {
         }
 
         cursor.close();
-
+        */
         return new ValueMessage(stamp);
 
     }
 
     private ValueMessage manageExtraction(ValueMessage message) {
-
+    /*
         switch (message.getType()) {
             case ValueMessage.VALUEMESSAGE_TYPE_SINGLE:
                 return manageSingleExtraction(message);
@@ -418,7 +419,8 @@ public class DataBaseController {
                 return new ValueMessage("Message subtype not recognized - manageExtraction -- subType value", true);
 
         }
-
+    */
+        return null;
     }
 
     ///
@@ -624,7 +626,7 @@ public class DataBaseController {
 
 
     private IterableMessage manageIterables(IterableMessage message) {
-
+    /*
         switch (message.getType()) {
             case IterableMessage.ITERABLEMESSAGE_TYPE_RADAR:
                 return fetchRadarIterables();
@@ -633,6 +635,8 @@ public class DataBaseController {
             default:
                 return new IterableMessage("Message subtype not recognized  - manageIterables -- subType Iterable", true);
         }
+        */
+        return null;
     }
 
     ///
@@ -640,18 +644,21 @@ public class DataBaseController {
     ///
 
     private UpdateMessage manageUtilities(UpdateMessage message) {
+        /*
         switch (message.getSubType()) {
             case UpdateMessage.UPDATEMESSAGE_UTILTYPE_COUNT:
                 return new UpdateMessage(isEmpty());
             default:
                 return new UpdateMessage("message type not recognized - manageUtilities", true);
         }
+        */
+        return null;
     }
 
     private UpdateMessage updateEnableName(UpdateMessage message) {
 
         ContentValues values = new ContentValues();
-
+    /*
         switch (message.getLocation()) {
             case UpdateMessage.UPDATEMESSAGE_LOCATION_FS:
 
@@ -680,7 +687,7 @@ public class DataBaseController {
             default:
                 return new UpdateMessage("UpdateMessage location not recognized, updateEnableName", true);
         }
-
+        */
         values.clear();
 
         return new UpdateMessage(false);
@@ -689,7 +696,7 @@ public class DataBaseController {
     private UpdateMessage updateEnableId(UpdateMessage message) {
 
         ContentValues values = new ContentValues();
-
+    /*
         switch (message.getLocation()) {
             case UpdateMessage.UPDATEMESSAGE_LOCATION_FS:
 
@@ -718,14 +725,14 @@ public class DataBaseController {
             default:
                 return new UpdateMessage("UpdateMessage location not recognized, updateEnableId", true);
         }
-
+    */
         values.clear();
 
         return new UpdateMessage(false);
     }
 
     private UpdateMessage updateTables(UpdateMessage message) {
-
+    /*
         switch (message.getSubType()) {
             case UpdateMessage.UPDATEMESSAGE_SUBTYPE_ENABLEID:
                 return updateEnableId(message);
@@ -734,9 +741,12 @@ public class DataBaseController {
             default:
                 return new UpdateMessage("UpdateMessage subType not recognized, updateTables", true);
         }
+        */
+        return null;
     }
 
     private UpdateMessage manageUpdates(UpdateMessage message) {
+        /*
         switch (message.getType()) {
             case UpdateMessage.UPDATEMESSAGE_TYPE_UPDATE:
                 return updateTables(message);
@@ -745,6 +755,8 @@ public class DataBaseController {
             default:
                 return new UpdateMessage("Message type not recognized - manageUpdates", true);
         }
+        */
+        return null;
     }
 
 

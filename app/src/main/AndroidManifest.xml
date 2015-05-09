@@ -39,19 +39,19 @@
             android:value="@integer/google_play_services_version" />
         <!-- -->
 
-        <!-- Service autostart BroadCastReciever
-        <receiver android:name="" >
+        <!-- Service autostart BroadCastReciever -->
+        <receiver android:name=".ServiceImp.ServiceHandler.ServiceBootStarter" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-          Service autostart BroadCastReciever -->
+        <!--  Service autostart BroadCastReciever -->
 
-        <!--Simple Service Implementation
+        <!--Simple Service Implementation -->
         <service
-            android:name=""
+            android:name=".ServiceImp.ServiceHandler.AppService"
             android:exported="false" />
-        -->
+        <!--       -->
 
         <activity
             android:name=".MainActivity"
