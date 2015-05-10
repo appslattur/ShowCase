@@ -19,7 +19,6 @@ import com.special.R;
 import com.special.ServiceImp.Interfaces.AppInterface;
 import com.special.ServiceImp.TickTackCounter.TickTackCounter;
 import com.special.ServiceImp.Util.StampExplainer;
-import com.special.TransitionDetailActivity;
 
 import java.util.ArrayList;
 import java.util.Timer;

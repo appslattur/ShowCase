@@ -1,15 +1,15 @@
 package com.special;
 
-import com.special.DataStorage.Objects.DataStamp;
+import com.special.ServiceImp.Util.StampExplainer;
 
 public class ListItem {
 	private int imageId;
 	private String title;
 	private String desc;
     private int id;
-    private DataStamp stamp;
+    private StampExplainer stamp;
 	
-	public ListItem(int imageId, String title, String desc, int id, DataStamp s) {
+	public ListItem(int imageId, String title, String desc, int id, StampExplainer s) {
 		this.imageId = imageId;
 		this.title = title;
 		this.desc = desc;
@@ -41,7 +41,7 @@ public class ListItem {
     public int getId(){
         return this.id;
     }
-    public DataStamp getStamp(){
+    public StampExplainer getStamp(){
         return this.stamp;
     }
 

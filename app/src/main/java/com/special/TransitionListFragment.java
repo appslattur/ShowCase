@@ -11,9 +11,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.special.DataBaseHandler.AsyncTasks.ValueTask;
-import com.special.DataStorage.Instances.ValueStamp;
 import com.special.DataStorage.Messages.ValueMessage;
-import com.special.ServiceImp.Util.Stamp;
+import com.special.ServiceImp.Util.StampExplainer;
+import com.special.ServiceImp.Util.StampParty;
 import com.special.appslattur.DatabaseHelper.DataBaseHelper;
 import com.special.appslattur.DatabaseHelper.TestHandler;
 import com.special.appslattur.LocationChainStructure.LocationChain;
@@ -31,6 +31,8 @@ public class TransitionListFragment extends Fragment {
     private TransitionListAdapter mAdapter;
     private ResideMenu resideMenu;
     private DataBaseHelper dbHelper;
+    private Bundle bundle;
+    private boolean isMallCase;
     
     //Vars
     private String PACKAGE = "IDENTIFY";
@@ -43,6 +45,17 @@ public class TransitionListFragment extends Fragment {
         listView   = (UISwipableList) parentView.findViewById(R.id.listView);
         MainActivity parentActivity = (MainActivity) getActivity();
         resideMenu = parentActivity.getResideMenu();
+        try{
+            bundle = parentActivity.getIntent().getExtras();
+            if(bundle.getBoolean("isSpacielCase")){
+                isMallCase = true;
+            }else{
+                isMallCase = false;
+            }
+        }catch(Exception e){
+
+        }
+
         initView();
         return parentView;
     }
@@ -90,19 +103,38 @@ public class TransitionListFragment extends Fragment {
             Context c = this.getActivity().getBaseContext();
             //EntryMessage yolo = new EntryTask(c).execute(new EntryMessage(new HardCodedTestEntries().getEntries(false))).get();
 
-            //Fá alla staði úr database
-            ValueMessage data = new ValueTask(c).execute(new ValueMessage()).get();
-            Stamp[] myStamp;
+            if(isMallCase){
 
-            //info hver lína úr töflu
-            for(ValueStamp info : data.getStamps()){
-                listData.add(new ListItem(
-                        LogoMatcher.getLogoResourceByName(info.getName()),
-                        info.getName(),
-                        info.getShortDescription(),
-                        info.getId(),
-                        info));
+                StampParty party = (StampParty) bundle.getSerializable("Stamp");
+
+             
+                for(StampExplainer info : party.getStampList()){
+                    listData.add(new ListItem(
+                            LogoMatcher.getLogoResourceByName(info.getName()),
+                            info.getName(),
+                            info.getShortDescription(),
+                            info.getID(),
+                            info));
+                }
+            }else{
+                ValueMessage data = new ValueTask(c).execute(new ValueMessage()).get();
+                StampParty party = new StampParty(c);
+
+
+                for(StampExplainer info : party.getStampList()){
+                    listData.add(new ListItem(
+                            LogoMatcher.getLogoResourceByName(info.getName()),
+                            info.getName(),
+                            info.getShortDescription(),
+                            info.getID(),
+                            info));
+                }
             }
+
+
+            //Fá alla staði úr database
+
+
         }catch(Exception e){
 
         }
