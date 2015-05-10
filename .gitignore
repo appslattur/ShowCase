@@ -1,7 +1,11 @@
 # Built application files
 *.apk
 *.ap_
+<<<<<<< HEAD
 *.idea
+=======
+.idea/workspace.xml
+>>>>>>> 3c88af248028be96e34486ff093408b48c93435e
 
 # Files for the Dalvik VM
 *.dex

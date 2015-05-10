@@ -1,5 +1,6 @@
 package com.special;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import com.special.DataBaseHandler.AsyncTasks.ValueTask;
+import com.special.DataStorage.Messages.ValueMessage;
+import com.special.ServiceImp.Util.StampExplainer;
+import com.special.ServiceImp.Util.StampParty;
 import com.special.appslattur.DatabaseHelper.DataBaseHelper;
 import com.special.appslattur.DatabaseHelper.TestHandler;
 import com.special.appslattur.LocationChainStructure.LocationChain;
@@ -26,6 +31,8 @@ public class TransitionListFragment extends Fragment {
     private TransitionListAdapter mAdapter;
     private ResideMenu resideMenu;
     private DataBaseHelper dbHelper;
+    private Bundle bundle;
+    private boolean isMallCase;
     
     //Vars
     private String PACKAGE = "IDENTIFY";
@@ -38,6 +45,17 @@ public class TransitionListFragment extends Fragment {
         listView   = (UISwipableList) parentView.findViewById(R.id.listView);
         MainActivity parentActivity = (MainActivity) getActivity();
         resideMenu = parentActivity.getResideMenu();
+        try{
+            bundle = parentActivity.getIntent().getExtras();
+            if(bundle.getBoolean("isSpacielCase")){
+                isMallCase = true;
+            }else{
+                isMallCase = false;
+            }
+        }catch(Exception e){
+
+        }
+
         initView();
         return parentView;
     }
@@ -52,21 +70,13 @@ public class TransitionListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View viewa, int i, long l) { 
                 ListItem item = (ListItem) listView.getAdapter().getItem(i);
-        
                 Intent intent = new Intent(getActivity(), TransitionDetailActivity.class);
-
-
-                //Setja id í bundle!
 
                 Bundle bundle = new Bundle();
 
-                /*bundle.putString("title", item.getTitle());
 
-                bundle.putString("descr", item.getDesc());
-                */
                 bundle.putInt("img", item.getImageId());
-                bundle.putInt("dbId", item.getId());
-                
+                bundle.putSerializable("Stamp", item.getStamp());
                 int[] screen_location = new int[2];
                 View view = viewa.findViewById(R.id.item_image);
                 view.getLocationOnScreen(screen_location);
@@ -88,29 +98,47 @@ public class TransitionListFragment extends Fragment {
         //Hér þarf að setja inn DataBaseHelper
         ArrayList<LocationChain> lChain = TestHandler.getLocations();
         ArrayList<ListItem> listData = new ArrayList<ListItem>();
-        //LogoMatcher matcher = new LogoMatcher();
-        for(LocationChain lc : lChain){
-            listData.add(new ListItem(
-                    LogoMatcher.getLogoResourceByName(lc.getName()),
-                    lc.getName(),
-                    TestHandler.getShortDescById(lc.getID()),
-                    lc.getID()));
+
+        try{
+            Context c = this.getActivity().getBaseContext();
+            //EntryMessage yolo = new EntryTask(c).execute(new EntryMessage(new HardCodedTestEntries().getEntries(false))).get();
+
+            if(isMallCase){
+
+                StampParty party = (StampParty) bundle.getSerializable("Stamp");
+
+             
+                for(StampExplainer info : party.getStampList()){
+                    listData.add(new ListItem(
+                            LogoMatcher.getLogoResourceByName(info.getName()),
+                            info.getName(),
+                            info.getShortDescription(),
+                            info.getID(),
+                            info));
+                }
+            }else{
+                ValueMessage data = new ValueTask(c).execute(new ValueMessage()).get();
+                StampParty party = new StampParty(c);
+
+
+                for(StampExplainer info : party.getStampList()){
+                    listData.add(new ListItem(
+                            LogoMatcher.getLogoResourceByName(info.getName()),
+                            info.getName(),
+                            info.getShortDescription(),
+                            info.getID(),
+                            info));
+                }
+            }
+
+
+            //Fá alla staði úr database
+
+
+        }catch(Exception e){
+
         }
 
-       /*
-        listData.add(new ListItem(R.drawable.ph_1, "Henry Smith", "Vacation!", null, null));
-        listData.add(new ListItem(R.drawable.ph_2, "Martinez", "Still exited from my trip last week!", null, null));
-        listData.add(new ListItem(R.drawable.ph_3, "Olivier Smith", "Visiting Canada next week!", null, null));
-        listData.add(new ListItem(R.drawable.ph_4, "Aria Thompson", "Can not go shopping tomorrow :(", null, null));
-        listData.add(new ListItem(R.drawable.ph_5, "Sophie Hill", "Live every day like it is the last one!", null, null));
-        listData.add(new ListItem(R.drawable.ph_6, "Addison Adams", "Not available, working...", null, null));
-        listData.add(new ListItem(R.drawable.ph_7, "Harper Clark", "Whats up?", null, null));
-        listData.add(new ListItem(R.drawable.ph_8, "Micheal Green", "Guess who has to work? Pfff..", null, null));
-        listData.add(new ListItem(R.drawable.ph_9, "Benjamin Lewis", "Playing games all week", null, null));
-        listData.add(new ListItem(R.drawable.ph_10, "Luke Wilson", "Anybody got any plans for this weekend?", null, null));
-        listData.add(new ListItem(R.drawable.ph_11, "Daniel Moore", "Going to the movies, so do not call me :)", null, null));
-        listData.add(new ListItem(R.drawable.ph_12, "Ella Smith", "Going on a trip with the family next week!", null, null));
-        */
         return listData;
     }
 }
