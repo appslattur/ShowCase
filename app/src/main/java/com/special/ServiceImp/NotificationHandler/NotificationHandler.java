@@ -14,9 +14,11 @@ import android.util.Log;
 import com.special.DataBaseHandler.AsyncTasks.IterableTask;
 import com.special.DataStorage.Instances.IterableStamp;
 import com.special.DataStorage.Messages.IterableMessage;
+import com.special.MainActivity;
 import com.special.R;
 import com.special.ServiceImp.Interfaces.AppInterface;
 import com.special.ServiceImp.TickTackCounter.TickTackCounter;
+import com.special.ServiceImp.Util.StampExplainer;
 import com.special.TransitionDetailActivity;
 
 import java.util.ArrayList;
@@ -103,7 +105,7 @@ public class NotificationHandler implements AppInterface {
     //
     ///
 
-    private Notification createBuilder(IterableStamp[] stamps) {
+    private Notification createBuilder(IterableStamp stamp, IterableStamp[] stamps) {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this.context);
 
@@ -121,10 +123,10 @@ public class NotificationHandler implements AppInterface {
 
         builder.setVibrate(new long[] { new Long(200), new Long(200) });
 
-
-        Intent intent = new Intent(this.context, TransitionDetailActivity.class);
+        Intent intent = new Intent(this.context, MainActivity.class);
+        intent.putExtra("isSpecialCase", stamp.isMall());
         intent.putExtra("arguments", "I am not a randomly generated string");
-        intent.putExtra("Stamp", stamps[0]);
+        intent.putExtra("Stamp", new StampExplainer(stamp));
         PendingIntent pIntent = PendingIntent.getActivity(this.context, 0, intent, 0);
 
         builder.setContentIntent(pIntent);
@@ -147,7 +149,7 @@ public class NotificationHandler implements AppInterface {
             return;
         }
 
-        Notification notification = createBuilder(message.getStamps());
+        Notification notification = createBuilder(stamp, message.getStamps());
 
         activeId = stamp.getId();
         isActive = true;
