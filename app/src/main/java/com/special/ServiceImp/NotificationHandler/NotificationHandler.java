@@ -17,6 +17,7 @@ import com.special.DataStorage.Messages.IterableMessage;
 import com.special.R;
 import com.special.ServiceImp.Interfaces.AppInterface;
 import com.special.ServiceImp.TickTackCounter.TickTackCounter;
+import com.special.TransitionDetailActivity;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -120,14 +121,14 @@ public class NotificationHandler implements AppInterface {
 
         builder.setVibrate(new long[] { new Long(200), new Long(200) });
 
-        /*
-        Intent intent = new Intent(this.context, NotiActivity.class);
+
+        Intent intent = new Intent(this.context, TransitionDetailActivity.class);
         intent.putExtra("arguments", "I am not a randomly generated string");
-        intent.putExtra("DataStamps", stamps);
+        intent.putExtra("Stamp", stamps[0]);
         PendingIntent pIntent = PendingIntent.getActivity(this.context, 0, intent, 0);
 
         builder.setContentIntent(pIntent);
-        */
+
         builder.setAutoCancel(true);
 
         return builder.build();

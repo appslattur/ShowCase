@@ -1,5 +1,6 @@
 package com.special;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import com.special.DataBaseHandler.AsyncTasks.ValueTask;
 import com.special.DataStorage.Instances.ValueStamp;
 import com.special.DataStorage.Messages.ValueMessage;
+import com.special.ServiceImp.Util.Stamp;
 import com.special.appslattur.DatabaseHelper.DataBaseHelper;
 import com.special.appslattur.DatabaseHelper.TestHandler;
 import com.special.appslattur.LocationChainStructure.LocationChain;
@@ -55,21 +57,13 @@ public class TransitionListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View viewa, int i, long l) { 
                 ListItem item = (ListItem) listView.getAdapter().getItem(i);
-        
                 Intent intent = new Intent(getActivity(), TransitionDetailActivity.class);
-
-
-                //Setja id í bundle!
 
                 Bundle bundle = new Bundle();
 
-                /*bundle.putString("title", item.getTitle());
 
-                bundle.putString("descr", item.getDesc());
-                */
                 bundle.putInt("img", item.getImageId());
-                bundle.putInt("dbId", item.getId());
-                
+                bundle.putSerializable("Stamp", item.getStamp());
                 int[] screen_location = new int[2];
                 View view = viewa.findViewById(R.id.item_image);
                 view.getLocationOnScreen(screen_location);
@@ -93,14 +87,21 @@ public class TransitionListFragment extends Fragment {
         ArrayList<ListItem> listData = new ArrayList<ListItem>();
 
         try{
-            ValueMessage data = new ValueTask(this.getActivity().getBaseContext()).execute(new ValueMessage()).get();
+            Context c = this.getActivity().getBaseContext();
+            //EntryMessage yolo = new EntryTask(c).execute(new EntryMessage(new HardCodedTestEntries().getEntries(false))).get();
+
+            //Fá alla staði úr database
+            ValueMessage data = new ValueTask(c).execute(new ValueMessage()).get();
+            Stamp[] myStamp;
+
+            //info hver lína úr töflu
             for(ValueStamp info : data.getStamps()){
                 listData.add(new ListItem(
                         LogoMatcher.getLogoResourceByName(info.getName()),
                         info.getName(),
                         info.getShortDescription(),
-                        info.getId()
-                ));
+                        info.getId(),
+                        info));
             }
         }catch(Exception e){
 

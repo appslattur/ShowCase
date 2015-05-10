@@ -3,6 +3,8 @@ package com.special.DataStorage.Objects;
 
 import android.util.Log;
 
+import java.io.Serializable;
+
 /**
  * @author Arnar Jonsson
  * @version  0.3
@@ -22,7 +24,7 @@ import android.util.Log;
  * They are created by calling super() on a specific DataStamp constructors
  *
  */
-public class DataStamp {
+public class DataStamp implements Serializable {
 
     ///
     // DataStamp Error Handling

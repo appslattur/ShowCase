@@ -1,7 +1,9 @@
 package com.special;
 
 import android.app.Activity;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewTreeObserver;
@@ -18,6 +20,7 @@ import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.nineoldandroids.view.ViewHelper;
+import com.special.ServiceImp.Util.StampExplainer;
 import com.special.appslattur.DatabaseHelper.DataBaseHelper;
 import com.special.utils.UICircularImage;
 import com.special.utils.UIParallaxScroll;
@@ -54,7 +57,7 @@ public class TransitionDetailActivity extends Activity {
     private float scale_height;
 	String title;
 	int imgId;
-    int dbId;
+
 	
 	String lor1 = "Pellentesque in luctus dui, non egestas nisl. Donec sapien ante, faucibus a sem at, tincidunt dictum quam. Sed vel blandit neque. Maecenas tincidunt at sem vel sodales. Nullam dignissim eros id tellus commodo, eu vulputate massa accumsan.<br><br>Ut eget volutpat turpis. Praesent ac auctor nisi, sed imperdiet augue. Aenean consequat est vel odio molestie pellentesque. Suspendisse rhoncus velit dolor, at ultrices nulla ullamcorper a. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vivamus nec felis elit. Mauris at erat euismod leo sagittis gravida in id magna.";
 	String lor2 = "Donec ornare eleifend turpis. Cras consectetur at neque sit amet bibendum. Nulla metus dui, porta vel mollis vitae, ornare sit amet lectus. Integer imperdiet quam eleifend nisl dictum vehicula. Suspendisse pharetra aliquet porttitor. Maecenas nec pharetra purus. Sed scelerisque suscipit faucibus. Etiam hendrerit tellus risus, et interdum tortor facilisis quis.";
@@ -65,7 +68,7 @@ public class TransitionDetailActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_transition);
-        dbHelper = new DataBaseHelper(getBaseContext());
+
 
         ((UIParallaxScroll) findViewById(R.id.scroller)).setOnScrollChangedListener(mOnScrollChangedListener);
 
@@ -91,14 +94,22 @@ public class TransitionDetailActivity extends Activity {
 	    
         Bundle bundle = getIntent().getExtras();
 
-        final int top = bundle.getInt(PACKAGE + ".top");
-        final int left = bundle.getInt(PACKAGE + ".left");
-        final int width = bundle.getInt(PACKAGE + ".width");
-        final int height = bundle.getInt(PACKAGE + ".height");     
-	    title = bundle.getString("title");
-	    String sum = bundle.getString("descr");
-	    imgId = bundle.getInt("img");
-        dbId = bundle.getInt("dbId");
+        StampExplainer stamp = (StampExplainer) getIntent().getSerializableExtra("Stamp");
+
+
+        final int top = 0;
+        final int left = 0;
+        Display d = getWindowManager().getDefaultDisplay();
+        Point p = new Point();
+        final int width = p.x;
+        final int height = p.y;
+
+        //title = stamp.getName();
+	    //String sum = stamp.getShortDescription();
+
+
+        //imgId = LogoMatcher.getLogoResourceByName(stamp.getName());
+
         /*
         Setup image discount, using 10% as placeholder
          */
@@ -131,11 +142,11 @@ public class TransitionDetailActivity extends Activity {
 
 
 	    mTitleView.setText(title);
-	    mSum.setText(sum);
+	    mSum.setText("Test");
 	    mImageView.setImageResource(imgId);
 	    mNavigationTitle.setText(title);
 
-        longDetailView.setText(dbHelper.getLongDescById(dbId));
+        longDetailView.setText("Long text");
 
 
 	    mNavigationBackBtn.setOnClickListener(new OnClickListener() {

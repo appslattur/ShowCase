@@ -122,13 +122,16 @@ public class Radar implements AppInterface {
 
         this.loc = loc;
 
-        for(IterableStamp stamp : stamps) {
 
+        for(IterableStamp stamp : stamps) {
+            callBack.onNotificationRequest(stamp);
+            /*
             if(isHit(stamp)) {
                 log("Radar - Hit found on IterableStamp - " + stamp.getType() + " - " + stamp.getId());
                 callBack.onNotificationRequest(stamp);
                 return;
             }
+            */
         }
 
         if(this.debug) log("Radar - iterateIterables - no hit found");
