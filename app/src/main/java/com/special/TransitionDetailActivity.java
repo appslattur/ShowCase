@@ -20,7 +20,6 @@ import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.nineoldandroids.view.ViewHelper;
-import com.special.ServiceImp.Util.StampExplainer;
 import com.special.appslattur.DatabaseHelper.DataBaseHelper;
 import com.special.utils.UICircularImage;
 import com.special.utils.UIParallaxScroll;
@@ -94,7 +93,7 @@ public class TransitionDetailActivity extends Activity {
 	    
         Bundle bundle = getIntent().getExtras();
 
-        StampExplainer stamp = (StampExplainer) getIntent().getSerializableExtra("Stamp");
+        //StampExplainer stamp = (StampExplainer) getIntent().getSerializableExtra("Stamp");
 
 
         final int top = 0;

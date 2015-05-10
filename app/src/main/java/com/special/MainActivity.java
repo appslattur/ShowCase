@@ -24,7 +24,20 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUpMenu();
-        changeFragment(new HomeFragment());
+        boolean isSpecial = false;
+        try{
+            Bundle b = getIntent().getExtras();
+            isSpecial = b.getBoolean("isSpecialCase");
+        }catch (Exception e){
+            //error handling
+        }
+        if(isSpecial){
+            changeFragment(new TransitionListFragment());
+        }else {
+            changeFragment(new HomeFragment());
+
+        }
+
         TestHandler.initHandler(getBaseContext());
     }
 
