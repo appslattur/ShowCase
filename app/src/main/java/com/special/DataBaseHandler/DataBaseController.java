@@ -417,6 +417,34 @@ public class DataBaseController {
     // DataBaseController iterable methods
     ///
 
+    private IterableMessage fetchViewIterables() {
+
+        Cursor cursor = db.query(true,
+                DataBaseHelper.FS_TABLE_NAME,
+                FS_allColumns,
+                null,
+                null,
+                FS_allColumns[3],
+                null,
+                null,
+                null
+        );
+
+        IterableStamp[] stamps = new IterableStamp[cursor.getCount()];
+        int stampCount = 0;
+
+        if(cursor.moveToFirst()) {
+            do {
+                stamps[stampCount++] = fetchDisplayFS(cursor);
+            }
+            while (cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        return new IterableMessage(stamps);
+
+    }
 
     private IterableStamp fetchDisplayFS(Cursor cursor) {
 
@@ -610,6 +638,9 @@ public class DataBaseController {
         }
         else if(message.getType().equals(IterableMessage.ITERABLEMESSAGE_TYPE_DISPLAY)) {
             return fetchDisplayIterables(message);
+        }
+        else if(message.getType().equals(IterableMessage.ITERABLEMESSAGE_TYPE_VIEW)) {
+            return fetchViewIterables();
         }
         else {
             return new IterableMessage("Message subtype not recognized  - manageIterables -- subType Iterable", true);

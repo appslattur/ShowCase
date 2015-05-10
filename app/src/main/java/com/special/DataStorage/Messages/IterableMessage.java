@@ -16,6 +16,7 @@ public class IterableMessage {
     ///
     public static final String ITERABLEMESSAGE_TYPE_RADAR = "IterableMessageRadar";
     public static final String ITERABLEMESSAGE_TYPE_DISPLAY = "IterableMessageDisplay";
+    public static final String ITERABLEMESSAGE_TYPE_VIEW = "IterableMessageView";
 
     ///
     // IterableMessage Variables
@@ -31,6 +32,10 @@ public class IterableMessage {
     // IterableMessage Constructors
     //
     ///
+
+    public IterableMessage() {
+        setType(IterableMessage.ITERABLEMESSAGE_TYPE_VIEW);
+    }
 
     // Input
     public IterableMessage(String type) {

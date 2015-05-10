@@ -8,7 +8,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.special.DataBaseHandler.AsyncTasks.EntryTask;
+import com.special.DataStorage.Messages.EntryMessage;
 import com.special.ServiceImp.ServiceHandler.AppService;
+import com.special.ServiceImp.Util.HardCodedTestEntries;
 import com.special.appslattur.DatabaseHelper.TestHandler;
 import com.special.menu.ResideMenu;
 import com.special.menu.ResideMenuItem;
@@ -24,6 +27,14 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUpMenu();
+
+        try {
+            EntryMessage yolo = new EntryTask(getApplicationContext()).execute(new EntryMessage(new HardCodedTestEntries().getEntries(false))).get();
+        }
+        catch (Exception e) {
+            // Do Nothing
+        }
+
         boolean isSpecial = false;
         try{
             Bundle b = getIntent().getExtras();

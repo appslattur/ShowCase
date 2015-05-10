@@ -3,8 +3,11 @@ package com.special.ServiceImp.Util;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.special.DataBaseHandler.AsyncTasks.IterableTask;
 import com.special.DataBaseHandler.AsyncTasks.ValueTask;
+import com.special.DataStorage.Instances.IterableStamp;
 import com.special.DataStorage.Instances.ValueStamp;
+import com.special.DataStorage.Messages.IterableMessage;
 import com.special.DataStorage.Messages.ValueMessage;
 import com.special.DataStorage.Objects.DataStamp;
 
@@ -51,18 +54,22 @@ public class StampParty implements Serializable {
     private void fetchViewIterables() {
 
         try {
-            ValueMessage message = new ValueTask(context).
-                    execute(new ValueMessage()).get();
-            if(message.getStamps() == null){
-                //Toast.makeText(context, "How many :" + message.getStamps().length, Toast.LENGTH_LONG).show();
-            }else{
-                //Toast.makeText(context, "How many :" + message.getStamps().length, Toast.LENGTH_LONG).show();
+            IterableMessage message = new IterableTask(context)
+                    .execute(new IterableMessage()).get();
+
+            if(message.isError()) {
+                Toast.makeText(context, "Something went horribly wrong", Toast.LENGTH_LONG).show();
             }
 
+            if(message.getStamps() == null) {
+                Toast.makeText(context, "Stamps are null", Toast.LENGTH_LONG).show();
+            }
 
-            for(ValueStamp stamp : message.getStamps()) {
+            for(IterableStamp stamp : message.getStamps()) {
                 addStamp(new StampExplainer(stamp));
             }
+
+            Toast.makeText(context, "Everything went right", Toast.LENGTH_LONG).show();
         }
         catch (Exception e) {
             Toast.makeText(context, "It broke", Toast.LENGTH_LONG).show();
