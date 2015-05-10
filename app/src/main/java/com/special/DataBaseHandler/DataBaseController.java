@@ -471,16 +471,6 @@ public class DataBaseController {
 
         if(message.getStamps()[0].isMall()) {
 
-            Cursor cursorFSMG = db.query(
-                    DataBaseHelper.FSMG_TABLE_NAME,
-                    FSMG_allColumns,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null
-            );
-
             Cursor cursorFS = db.query(
                     DataBaseHelper.FS_TABLE_NAME,
                     FS_allColumns,
@@ -491,20 +481,16 @@ public class DataBaseController {
                     FS_allColumns[0]
             );
 
-            cursorFSMG.moveToFirst();
-            cursorFS.moveToFirst();
+            IterableStamp[] stamps = new IterableStamp[cursorFS.getCount()];
+            int stampCount = 0;
 
-            IterableStamp[] stamps = new IterableStamp[cursorFS.getCount() + 1];
-            int stampCount = 1;
-            stamps[0] = fetchDisplayFSMG(cursorFSMG);
-            while (!cursorFS.isAfterLast()) {
-
-                stamps[stampCount++] = fetchDisplayFS(cursorFS);
-
-                cursorFS.moveToNext();
+            if(cursorFS.moveToFirst()) {
+                do {
+                    stamps[stampCount++] = fetchDisplayFS(cursorFS);
+                }
+                while (cursorFS.moveToNext());
             }
 
-            cursorFSMG.close();
             cursorFS.close();
 
             return new IterableMessage(stamps);
@@ -521,13 +507,15 @@ public class DataBaseController {
                 null
         );
 
-        cursor.moveToFirst();
+        if(cursor.moveToFirst()) {
+            IterableStamp stamp = fetchDisplayFS(cursor);
 
-        IterableStamp stamp = fetchDisplayFS(cursor);
+            cursor.close();
 
-        cursor.close();
+            return new IterableMessage(stamp);
+        }
 
-        return new IterableMessage(stamp);
+        return new IterableMessage("Something went wrong", true);
     }
 
     private IterableStamp fetchRadarFS(Cursor cursor) {
