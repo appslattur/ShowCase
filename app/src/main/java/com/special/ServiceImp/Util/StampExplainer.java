@@ -1,32 +1,63 @@
 package com.special.ServiceImp.Util;
 
+import android.content.Context;
+
+import com.special.DataBaseHandler.AsyncTasks.IterableTask;
+import com.special.DataBaseHandler.AsyncTasks.ValueTask;
+import com.special.DataStorage.Messages.IterableMessage;
+import com.special.DataStorage.Messages.ValueMessage;
 import com.special.DataStorage.Objects.DataStamp;
 
-/**
- * Created by Ari on 10.5.2015.
- */
-public class StampExplainer implements Stamp{
+import java.io.Serializable;
 
-    DataStamp myStamp;
+/**
+ * @author Ari Freyr Gudmundsson
+ * @version 0.1
+ * @since  on 10.5.2015.
+ */
+public class StampExplainer implements Stamp, Serializable {
+
+    ///
+    // StampExplainer Variables
+    //
+    ///
+
+    private DataStamp stamp;
+
+    ///
+    // StampExplainer Constructors
+    //
+    ///
+
+    public StampExplainer(DataStamp stamp) {
+        this.stamp = stamp;
+    }
+
+    ///
+    // Stamp Interface Implementation
+    //
+    ///
 
     @Override
     public String getLongDescription() {
         
-        return null;
+        return stamp.getLongDescription();
     }
 
     @Override
     public String getShortDescription() {
-        return null;
+        return stamp.getShortDescription();
     }
 
     @Override
     public int getID() {
-        return 0;
+        return stamp.getId();
+
     }
 
     @Override
     public String getName() {
-        return null;
+        return stamp.getName();
     }
+
 }
