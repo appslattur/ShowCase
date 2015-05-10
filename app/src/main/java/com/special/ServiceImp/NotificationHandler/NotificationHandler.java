@@ -19,6 +19,7 @@ import com.special.R;
 import com.special.ServiceImp.Interfaces.AppInterface;
 import com.special.ServiceImp.TickTackCounter.TickTackCounter;
 import com.special.ServiceImp.Util.StampExplainer;
+import com.special.ServiceImp.Util.StampParty;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -122,10 +123,18 @@ public class NotificationHandler implements AppInterface {
 
         builder.setVibrate(new long[] { new Long(200), new Long(200) });
 
+        StampParty party;
+        if(stamp.isMall()) {
+            party = new StampParty(stamps);
+        }
+        else {
+            party = new StampParty(stamps[0]);
+        }
+
         Intent intent = new Intent(this.context, MainActivity.class);
+        intent.putExtra("isNotification", true);
         intent.putExtra("isSpecialCase", stamp.isMall());
-        intent.putExtra("arguments", "I am not a randomly generated string");
-        intent.putExtra("Stamp", new StampExplainer(stamp));
+        intent.putExtra("Stamp", party);
         PendingIntent pIntent = PendingIntent.getActivity(this.context, 0, intent, 0);
 
         builder.setContentIntent(pIntent);
