@@ -6,6 +6,7 @@ import android.widget.Toast;
 import com.special.DataBaseHandler.AsyncTasks.ValueTask;
 import com.special.DataStorage.Instances.ValueStamp;
 import com.special.DataStorage.Messages.ValueMessage;
+import com.special.DataStorage.Objects.DataStamp;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,6 +24,20 @@ public class StampParty implements Serializable {
         this.context = context;
 
         fetchViewIterables();
+    }
+
+    public StampParty(DataStamp stamp) {
+
+        addStamp(new StampExplainer(stamp));
+
+    }
+
+    public StampParty(DataStamp[] stamps) {
+
+        for(DataStamp stamp : stamps) {
+            addStamp(new StampExplainer(stamp));
+        }
+
     }
 
     public ArrayList<StampExplainer> getStampList() {
