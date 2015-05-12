@@ -5,8 +5,7 @@ import com.special.DataStorage.Objects.DataStamp;
 /**
  * @author Arnar Jonsson
  * @version 0.2
- * @since ..
- * Originally created on ..
+ *
  */
 public class IterableStamp extends DataStamp {
 

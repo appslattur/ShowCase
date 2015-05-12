@@ -5,8 +5,9 @@ import com.special.DataStorage.Instances.ValueStamp;
 /**
  * @author Arnar Jonsson
  * @version 0.2
- * @since ..
- * Originally created on ..
+ *
+ * ValueMessage
+ * Extraction message for the in-app database
  */
 public class ValueMessage {
     ///

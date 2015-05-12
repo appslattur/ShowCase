@@ -5,8 +5,9 @@ import com.special.DataStorage.Instances.IterableStamp;
 /**
  * @author Arnar Jonsson
  * @version 0.2
- * @since ..
- * Originally created on ..
+ *
+ * IterableMessage
+ * Specific extraction messages for the in-app database
  */
 public class IterableMessage {
 

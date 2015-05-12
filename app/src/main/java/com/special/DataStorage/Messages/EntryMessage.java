@@ -5,8 +5,9 @@ import com.special.DataStorage.Instances.EntryStamp;
 /**
  * @author Arnar Jonsson
  * @version 0.2
- * @since ..
- * Originally created on ..
+ *
+ * EntryMessage
+ * Insertion message for the in-app database
  */
 public class EntryMessage {
 

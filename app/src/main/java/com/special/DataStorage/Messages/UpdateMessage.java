@@ -3,10 +3,12 @@ package com.special.DataStorage.Messages;
 /**
  * @author Arnar Jonsson
  * @version 0.2
- * @since ..
- * Originally created on ..
+ *
+ * UpdateMessage
+ * Update and utility message for the in-app database
  */
 public class UpdateMessage {
+
     ///
     // UpdateMessage Control Flow
     //

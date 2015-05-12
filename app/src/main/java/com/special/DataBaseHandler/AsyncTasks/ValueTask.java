@@ -11,12 +11,14 @@ import java.sql.SQLException;
 /**
  * @author Arnar Jonsson
  * @version 0.2
- * @
+ *
+ * ValueTask
+ * Handles simple extractions
  */
 public class ValueTask  extends AsyncTask<ValueMessage, Void, ValueMessage> {
 
     ///
-    // EntryTask Variables
+    // ValueTask Variables
     //
     ///
     private Context context;

@@ -5,10 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * @author Arnar Jonsson
+ * @author Ari Freyr
  * @version 0.5
- * @since ..
- * Originally created on .., Ari Freyr, Arnar Jonsson
  */
 public class DataBaseHelper extends SQLiteOpenHelper {
     // DATABASE NAME AND INITIAL VERSION

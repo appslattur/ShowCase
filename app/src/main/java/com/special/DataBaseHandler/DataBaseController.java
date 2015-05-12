@@ -17,7 +17,8 @@ import com.special.DataStorage.Objects.DataStamp;
 import java.sql.SQLException;
 
 /**
- * Created by arnarjons on 8.5.2015.
+ * @author Arnar Jonsson
+ * @version 0.4
  */
 public class DataBaseController {
 
@@ -149,7 +150,7 @@ public class DataBaseController {
     }
 
     /**
-     * @param message UpdateMessage containing iterable flags
+     * @param message UpdateMessage containing update flags
      * @return UpdateMessage
      */
     public UpdateMessage executeUpdates(UpdateMessage message) {
@@ -161,6 +162,9 @@ public class DataBaseController {
     // DataBaseController insertion methods
     ///
 
+    /**
+     * Insertion of FSMG row
+     */
     private String insertFSMGEntry(EntryStamp stamp) {
 
         String report = "";
@@ -183,6 +187,9 @@ public class DataBaseController {
         return report;
     }
 
+    /**
+     * Insrtion of FS row
+     */
     private String insertFSEntry(EntryStamp stamp) {
 
         String report = "";

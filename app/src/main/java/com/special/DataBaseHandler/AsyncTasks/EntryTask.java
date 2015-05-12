@@ -11,8 +11,9 @@ import java.sql.SQLException;
 /**
  * @author Arnar Jonsson
  * @version 0.5
- * @since ..
- * Originally created on ..
+ *
+ * EntryTask
+ * Handles insertion of DataStamps into the in-app Database
  */
 public class EntryTask extends AsyncTask<EntryMessage, Void, EntryMessage> {
 

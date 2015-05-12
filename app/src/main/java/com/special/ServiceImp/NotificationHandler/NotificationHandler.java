@@ -27,7 +27,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by arnarjons on 3.5.2015.
+ * @author Arnar Jonsson, Ari Freyr
+ * @version 0.3
+ *
+ * NotificationHandler
+ * Handles notifications for the application
+ * Houses an queue that stores newly fired notifications so the user
+ * does not get overwhelmed
  */
 public class NotificationHandler implements AppInterface {
 
@@ -60,6 +66,15 @@ public class NotificationHandler implements AppInterface {
     //
     ///
 
+    /**
+     * NotificationHandler.class
+     *
+     * Handles notifications for the application
+     *
+     * @param callBack AppInterface.callback
+     * @param context application context
+     * @param debug debug
+     */
     public NotificationHandler(AppInterface callBack, Context context, boolean debug) {
 
         this.callBack = callBack;
@@ -98,6 +113,9 @@ public class NotificationHandler implements AppInterface {
         manageInitialization();
     }
 
+    /**
+     *
+     */
     public void releaseFromMemory() {
         manageMemoryRelease();
     }

@@ -11,12 +11,14 @@ import java.sql.SQLException;
 /**
  * @author Arnar Jonsson
  * @version 0.2
- * @since ..
- * Originally created on ..
+ *
+ * UpdateTask
+ * Handles database updates and other utility tasks
  */
 public class UpdateTask extends AsyncTask<UpdateMessage, Void, UpdateMessage> {
-    //
-    // EntryTask Variables
+
+    ///
+    // UpdateTask Variables
     //
     ///
     private Context context;

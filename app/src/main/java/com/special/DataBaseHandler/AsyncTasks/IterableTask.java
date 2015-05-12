@@ -11,13 +11,14 @@ import java.sql.SQLException;
 /**
  * @author Arnar Jonsson
  * @version 0.2
- * @since ..
- * Originally created ..
+ *
+ * IterableTask
+ * Handles data destined for viewing (front end?)
  */
 public class IterableTask extends AsyncTask<IterableMessage, Void, IterableMessage> {
 
     ///
-    // EntryTask Variables
+    // IterableTask Variables
     //
     ///
     private Context context;
