@@ -55,7 +55,7 @@ public class Radar implements AppInterface {
         this.debug = debug;
         this.context = context;
         this.callBack = callBack;
-        this.locationClient = new LocationClient(context, this, 1000*60*3, 1000*60, debug);
+        this.locationClient = new LocationClient(context, this, 1000*60, 1000*30, debug);
 
         if(debug) log("Radar - constructor call");
     }
@@ -109,7 +109,7 @@ public class Radar implements AppInterface {
             Log.d("Radar", "pingradius of home is : " + stamp.getPingRadius());
         }
 
-        if(loc.distanceTo(stampLocation) < 10) return true;
+        if(loc.distanceTo(stampLocation) < stamp.getPingRadius()*10) return true;
 
         /*
         float[] results = new float[1];

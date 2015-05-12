@@ -34,6 +34,7 @@ public class NotificationHandler implements AppInterface {
     // NotificationHandler Variables
     //
     ///
+
     private AppInterface callBack;
     private boolean debug;
 
@@ -113,7 +114,7 @@ public class NotificationHandler implements AppInterface {
 
         builder.setContentTitle(this.TITLE_BANNER);
 
-        builder.setContentText(this.CONTENT_BANNER + stamps[0].getCardGroup());
+        builder.setContentText(this.CONTENT_BANNER);
 
         // TODO: FIX THIS SHIT SO IT WORKS
         builder.setSmallIcon(R.drawable.ic_launcher);
@@ -150,10 +151,11 @@ public class NotificationHandler implements AppInterface {
 
         try {
             message = new IterableTask(context).execute(message).get();
+            Log.d("NotificationHandler", "IterableTask callback success");
 
         }
         catch (Exception e) {
-            log("NotificationHandler - IterableTask callback failure");
+            Log.d("NotificationHandler", "IterableTask callback failure");
             return;
         }
 

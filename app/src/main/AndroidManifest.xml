@@ -54,7 +54,7 @@
         <!--       -->
 
         <!-- Simple Service Restarter -->
-        <receiver android:name=".ServiceImp.ServiceHandler.ServiceBootStarter"/>
+        <receiver android:name=".ServiceImp.ServiceHandler.ServiceRestarter"/>
         <!-- -->
 
         <activity

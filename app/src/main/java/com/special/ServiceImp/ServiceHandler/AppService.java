@@ -35,6 +35,8 @@ public class AppService extends Service implements AppInterface {
     private boolean debug = true; // TODO : False this
     private ArrayList<String> logList = new ArrayList<String>();
 
+    private boolean hasBeenInitialized;
+
     ///
     // AppService Variables
     //
@@ -89,7 +91,10 @@ public class AppService extends Service implements AppInterface {
 
     @Override
     public void onCreate() {
+        super.onCreate();
         if(this.debug) log("AppService - onCreate call");
+
+        hasBeenInitialized = false;
         // TODO : Check if this breaks thingies
         //super.onCreate();
         /*
@@ -103,6 +108,8 @@ public class AppService extends Service implements AppInterface {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        super.onStartCommand(intent, flags, startId);
+
         if(this.debug) log("AppService - onStartCommand called");
         /*
         if(intent != null) {
@@ -113,8 +120,7 @@ public class AppService extends Service implements AppInterface {
         }
 
         */
-
-        initializeService();
+        if(!hasBeenInitialized) initializeService();
 
         return START_STICKY;
     }
@@ -140,27 +146,27 @@ public class AppService extends Service implements AppInterface {
     ///
 
     private void initializeService() {
-        if(debug) log("AppService initialization");
+        if(debug) Log.d("AppService",  "initialization");
 
         try {
             radarInitialization();
             notificationHandlerInitialization();
+            if(debug) Log.d("AppService",  "initialization successful");
         }
         catch (Exception e) {
             log(e.toString());
+            if(debug) Log.d("AppService",  "initialization failed");
             // Do nothing
         }
     }
 
     private void radarInitialization() {
-        if(debug) log("AppService - radar initialization");
 
         radar = new Radar(this, getApplicationContext(), debug);
         radar.initialize();
     }
 
     private void notificationHandlerInitialization() {
-        if(debug) log("AppService - notificationHandler initialization");
 
         notificationHandler = new NotificationHandler(this, getApplicationContext(), debug);
         notificationHandler.initialize();
