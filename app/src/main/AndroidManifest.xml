@@ -53,12 +53,15 @@
             android:exported="false" />
         <!--       -->
 
+        <!-- Simple Service Restarter -->
+        <receiver android:name=".ServiceImp.ServiceHandler.ServiceBootStarter"/>
+        <!-- -->
+
         <activity
             android:name=".MainActivity"
             android:configChanges="screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@style/AppTheme" >
-
         </activity>
 
 

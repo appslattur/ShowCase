@@ -44,8 +44,8 @@ public class HardCodedTestEntries {
         else {
             ArnarStamp = new EntryStamp(
                     fsCounter++,
-                    10.0,
-                    10.0,
+                    64.13474547198153,
+                    -21.949346931651235,
                     "Home",
                     "Arnar",
                     "General",

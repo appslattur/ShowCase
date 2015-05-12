@@ -99,6 +99,19 @@ public class Radar implements AppInterface {
 
     private boolean isHit(IterableStamp stamp) {
 
+
+        Location stampLocation = new Location("StampLoc");
+        stampLocation.setLatitude(stamp.getLatitude());
+        stampLocation.setLongitude(stamp.getLongitude());
+
+        if(stamp.getName().equals("Home")) {
+            Log.d("Radar", "distance to home is : " + loc.distanceTo(stampLocation));
+            Log.d("Radar", "pingradius of home is : " + stamp.getPingRadius());
+        }
+
+        if(loc.distanceTo(stampLocation) < 10) return true;
+
+        /*
         float[] results = new float[1];
         Location.distanceBetween(this.loc.getLatitude(), this.loc.getLongitude(),
                 stamp.getLatitude(), stamp.getLongitude(), results);
@@ -107,7 +120,7 @@ public class Radar implements AppInterface {
         if(results[0] < stamp.getPingRadius()) {
             return true;
         }
-
+        */
         return false;
 
 
@@ -124,17 +137,17 @@ public class Radar implements AppInterface {
 
 
         for(IterableStamp stamp : stamps) {
-            callBack.onNotificationRequest(stamp);
-            /*
+            //callBack.onNotificationRequest(stamp);
+
             if(isHit(stamp)) {
-                log("Radar - Hit found on IterableStamp - " + stamp.getType() + " - " + stamp.getId());
+                Log.d("Radar", "Hit found on IterableStamp - " + stamp.getType() + " - " + stamp.getId());
                 callBack.onNotificationRequest(stamp);
                 return;
             }
-            */
+
         }
 
-        if(this.debug) log("Radar - iterateIterables - no hit found");
+        if(this.debug) Log.d("Radar",  "iterateIterables - no hit found");
 
     }
 

@@ -106,7 +106,7 @@ public class NotificationHandler implements AppInterface {
     ///
 
     private Notification createBuilder(IterableStamp stamp, IterableStamp[] stamps) {
-
+        if(this.debug) Log.d("NotificationHandler", "createBuilder");
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this.context);
 
         builder.setTicker(this.HANDLER_BANNER);
@@ -145,7 +145,7 @@ public class NotificationHandler implements AppInterface {
     }
 
     private void createNotification(IterableStamp stamp) {
-
+        if(this.debug) Log.d("NotificationHandler", "createNotification");
         IterableMessage message = new IterableMessage(stamp);
 
         try {
@@ -172,7 +172,7 @@ public class NotificationHandler implements AppInterface {
     }
 
     private void manageNotificationRequest(IterableStamp stamp) {
-
+        if(this.debug) Log.d("NotificationHandler", "manageNotificationRequest");
         if(isActive) return;
 
         if(tickTackCounter.tick(stamp.getId())) {
