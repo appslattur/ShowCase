@@ -35,19 +35,21 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         setUpMenu();
 
         setUpDataBase();
-        setUpService();
+        //setUpService();
 
         boolean isSpecial = false;
+        boolean isMall = false;
         try{
             Bundle b = getIntent().getExtras();
             isSpecial = b.getBoolean("isNotification");
+            isMall = b.getBoolean("isMall");
         }
         catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Bundle from Notification is a bit blurry", Toast.LENGTH_SHORT).show();
         }
 
 
-        if(isSpecial){
+        if(isSpecial) {
             changeFragment(new TransitionListFragment());
         }
         else {
@@ -205,7 +207,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         }
 
     }
-
+        /*
     private void setUpService() {
 
         ActivityManager manager = (ActivityManager) this.getSystemService(Context.ACTIVITY_SERVICE);
@@ -217,5 +219,5 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         startService(new Intent(this, AppService.class));
     }
-
+        */
 }

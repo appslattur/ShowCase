@@ -18,11 +18,10 @@ public class HardCodedTestEntries {
         ///
         // Taeknigardur ShittNigg
         ///
-
         EntryStamp TGMall = new EntryStamp(
                 FSMGID++,
-                0.0,
-                0.0,
+                64.1393411,
+                -21.9555124,
                 "TaekniGardurMall",
                 true,
                 1
@@ -97,8 +96,8 @@ public class HardCodedTestEntries {
 
         EntryStamp TGENTRYReal = new EntryStamp(
                 FSID++,
-                0.0,
-                0.0,
+                64.1392495,
+                -21.9556018,
                 "TGStoraStofa",
                 "StudentaKort",
                 "General",
@@ -116,8 +115,8 @@ public class HardCodedTestEntries {
 
         EntryStamp ArnarMall = new EntryStamp(
                 FSMGID++,
-                64.13469632646542,
-                -21.949308458715677,
+                0.0,
+                0.0,
                 "ArnarMall",
                 true,
                 1
@@ -125,8 +124,8 @@ public class HardCodedTestEntries {
 
         EntryStamp ArnarNonMall = new EntryStamp(
                 FSID++,
-                64.13480397843495,
-                -21.94948548451066,
+                0.0,
+                0.0,
                 "ArnarNonMall",
                 "Kort",
                 "General",
@@ -214,6 +213,7 @@ public class HardCodedTestEntries {
         stamps[stampCount++] = TGENTRY4;
         stamps[stampCount++] = TGENTRY5;
         stamps[stampCount++] = TGENTRYReal;
+
         stamps[stampCount++] = ArnarMall;
         stamps[stampCount++] = ArnarPlace1;
         stamps[stampCount++] = ArnarPlace2;

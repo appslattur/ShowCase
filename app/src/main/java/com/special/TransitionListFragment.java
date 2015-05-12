@@ -118,7 +118,8 @@ public class TransitionListFragment extends Fragment {
                             info.getID(),
                             info));
                 }
-            }else
+            }
+            else
             {
 
                 StampParty party = new StampParty(c);

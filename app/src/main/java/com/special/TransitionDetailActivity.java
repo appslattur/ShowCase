@@ -15,12 +15,16 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.nineoldandroids.view.ViewHelper;
+import com.special.ServiceImp.Util.StampExplainer;
+import com.special.ServiceImp.Util.StampParty;
 import com.special.appslattur.DatabaseHelper.DataBaseHelper;
+import com.special.appslattur.Tools.LogoMatcher;
 import com.special.utils.UICircularImage;
 import com.special.utils.UIParallaxScroll;
 
@@ -91,7 +95,7 @@ public class TransitionDetailActivity extends Activity {
 	    
         mImageView.bringToFront();
 	    
-        Bundle bundle = getIntent().getExtras();
+        //Bundle bundle = getIntent().getExtras();
 
         //StampExplainer stamp = (StampExplainer) getIntent().getSerializableExtra("Stamp");
 
@@ -102,6 +106,27 @@ public class TransitionDetailActivity extends Activity {
         Point p = new Point();
         final int width = p.x;
         final int height = p.y;
+
+        String longDesc = "Test string";
+        String sum = "";
+        try {
+            Bundle bundle = getIntent().getExtras();
+            Toast.makeText(getApplicationContext(), "isNotification is : " + bundle.getBoolean("isNotification"), Toast.LENGTH_LONG).show();
+            StampParty party = (StampParty) bundle.getSerializable("Stamp");
+            title = party.getStampList().get(0).getName();
+            sum = party.getStampList().get(0).getShortDescription();
+            imgId = LogoMatcher.getLogoResourceByName(party.getStampList().get(0).getName());
+            longDesc = party.getStampList().get(0).getShortDescription();
+
+        }
+        catch (Exception e) {
+            Bundle b = getIntent().getExtras();
+            StampExplainer explainer = (StampExplainer) b.getSerializable("Stamp");
+            title = explainer.getName();
+            sum = explainer.getShortDescription();
+            imgId = LogoMatcher.getLogoResourceByName(explainer.getName());
+            longDesc = explainer.getLongDescription();
+        }
 
         //title = stamp.getName();
 	    //String sum = stamp.getShortDescription();
@@ -141,11 +166,11 @@ public class TransitionDetailActivity extends Activity {
 
 
 	    mTitleView.setText(title);
-	    mSum.setText("Test");
+	    mSum.setText(sum);
 	    mImageView.setImageResource(imgId);
 	    mNavigationTitle.setText(title);
 
-        longDetailView.setText("Long text");
+        longDetailView.setText(longDesc);
 
 
 	    mNavigationBackBtn.setOnClickListener(new OnClickListener() {

@@ -20,6 +20,7 @@ import com.special.ServiceImp.Interfaces.AppInterface;
 import com.special.ServiceImp.TickTackCounter.TickTackCounter;
 import com.special.ServiceImp.Util.StampExplainer;
 import com.special.ServiceImp.Util.StampParty;
+import com.special.TransitionDetailActivity;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -124,15 +125,17 @@ public class NotificationHandler implements AppInterface {
 
         builder.setVibrate(new long[] { new Long(200), new Long(200) });
 
+        Intent intent;
         StampParty party;
         if(stamp.isMall()) {
             party = new StampParty(stamps);
+            intent = new Intent(this.context, MainActivity.class);
         }
         else {
             party = new StampParty(stamps[0]);
+            intent = new Intent(this.context, TransitionDetailActivity.class);
         }
 
-        Intent intent = new Intent(this.context, MainActivity.class);
         intent.putExtra("isNotification", true);
         intent.putExtra("isMall", stamp.isMall());
         intent.putExtra("Stamp", party);
