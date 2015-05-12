@@ -3,6 +3,7 @@ package com.special.ServiceImp.RadarHandler;
 import android.content.Context;
 import android.location.Location;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.special.DataBaseHandler.AsyncTasks.IterableTask;
 import com.special.DataStorage.Instances.IterableStamp;
@@ -117,10 +118,10 @@ public class Radar implements AppInterface {
                 stamp.getLatitude(), stamp.getLongitude(), results);
 
 
-        if(results[0] < stamp.getPingRadius()) {
+        if(results[0] < 10) {
             return true;
         }
-        */
+*/
         return false;
 
 
@@ -141,6 +142,7 @@ public class Radar implements AppInterface {
 
             if(isHit(stamp)) {
                 Log.d("Radar", "Hit found on IterableStamp - " + stamp.getType() + " - " + stamp.getId());
+                Log.d("Radar", "Hit found on IterableStamp - Stamp length is :" +stamps.length);
                 callBack.onNotificationRequest(stamp);
                 return;
             }
@@ -158,6 +160,7 @@ public class Radar implements AppInterface {
 
             if(message != null && !message.isError()) {
                 stamps = message.getStamps();
+                Toast.makeText(context, "Stamp size is : " + stamps.length, Toast.LENGTH_SHORT).show();
                 if(this.debug) Log.d("Radar", "populateStamps - success");
                 return;
             }

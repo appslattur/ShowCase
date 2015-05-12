@@ -3,6 +3,7 @@ package com.special.ServiceImp.RadarHandler;
 import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -196,6 +197,7 @@ public class LocationClient implements GoogleApiClient.ConnectionCallbacks,
     // AppInterface callback
     ///
     private void handleCallBack(Location loc) {
+        Toast.makeText(context, "LAT is :" + loc.getLatitude() + " " + "LON is :" + loc.getLongitude(), Toast.LENGTH_LONG).show();
         callback.onLocationChange(loc);
     }
 

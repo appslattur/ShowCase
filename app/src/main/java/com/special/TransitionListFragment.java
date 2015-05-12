@@ -32,7 +32,8 @@ public class TransitionListFragment extends Fragment {
     private ResideMenu resideMenu;
     private DataBaseHelper dbHelper;
     private Bundle bundle;
-    private boolean isMallCase;
+    private boolean isNotification;
+    private boolean isMall;
     
     //Vars
     private String PACKAGE = "IDENTIFY";
@@ -45,15 +46,16 @@ public class TransitionListFragment extends Fragment {
         listView   = (UISwipableList) parentView.findViewById(R.id.listView);
         MainActivity parentActivity = (MainActivity) getActivity();
         resideMenu = parentActivity.getResideMenu();
+
         try{
             bundle = parentActivity.getIntent().getExtras();
-            if(bundle.getBoolean("isSpacielCase")){
-                isMallCase = true;
-            }else{
-                isMallCase = false;
-            }
-        }catch(Exception e){
+            isNotification = bundle.getBoolean("isNotification");
+            isMall = bundle.getBoolean("isMall");
 
+        }
+        catch(Exception e){
+            isNotification = false;
+            isMall = false;
         }
 
         initView();
@@ -103,7 +105,7 @@ public class TransitionListFragment extends Fragment {
             Context c = this.getActivity().getBaseContext();
             //EntryMessage yolo = new EntryTask(c).execute(new EntryMessage(new HardCodedTestEntries().getEntries(false))).get();
 
-            if(isMallCase){
+            if(isNotification){
 
                 StampParty party = (StampParty) bundle.getSerializable("Stamp");
 
@@ -116,8 +118,9 @@ public class TransitionListFragment extends Fragment {
                             info.getID(),
                             info));
                 }
-            }else{
-                ValueMessage data = new ValueTask(c).execute(new ValueMessage()).get();
+            }else
+            {
+
                 StampParty party = new StampParty(c);
 
 

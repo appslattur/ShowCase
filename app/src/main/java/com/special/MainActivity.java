@@ -1,5 +1,7 @@
 package com.special;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,10 +9,14 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.special.DataBaseHandler.AsyncTasks.EntryTask;
+import com.special.DataBaseHandler.AsyncTasks.UpdateTask;
 import com.special.DataStorage.Messages.EntryMessage;
+import com.special.DataStorage.Messages.UpdateMessage;
 import com.special.ServiceImp.ServiceHandler.AppService;
+import com.special.ServiceImp.Util.DataStreamTest;
 import com.special.ServiceImp.Util.HardCodedTestEntries;
 import com.special.appslattur.DatabaseHelper.TestHandler;
 import com.special.menu.ResideMenu;
@@ -28,23 +34,23 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         setContentView(R.layout.activity_main);
         setUpMenu();
 
-        try {
-            EntryMessage yolo = new EntryTask(getApplicationContext()).execute(new EntryMessage(new HardCodedTestEntries().getEntries(false))).get();
-        }
-        catch (Exception e) {
-            // Do Nothing
-        }
+        setUpDataBase();
+        setUpService();
 
         boolean isSpecial = false;
         try{
             Bundle b = getIntent().getExtras();
-            isSpecial = b.getBoolean("isSpecialCase");
-        }catch (Exception e){
-            //error handling
+            isSpecial = b.getBoolean("isNotification");
         }
+        catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Bundle from Notification is a bit blurry", Toast.LENGTH_SHORT).show();
+        }
+
+
         if(isSpecial){
             changeFragment(new TransitionListFragment());
-        }else {
+        }
+        else {
             changeFragment(new HomeFragment());
 
         }
@@ -71,10 +77,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         //Þetta verður listi með okkar afsláttum
         afslaettirList = new ResideMenuItem(this, R.drawable.ic_list_1, "Afslættir");
 
-        /*
-        Setja upp notification test case
-         */
-        startService(new Intent(this, AppService.class));
+
 
         itemHome.setOnClickListener(this);
         //itemElements.setOnClickListener(this);
@@ -153,5 +156,66 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     	} else {
     		resideMenu.openMenu();
     	}
+
     }
+
+    ///
+    // DataBase Initialization
+    //
+    ///
+
+    private void createTestEntries() {
+
+        try {
+            EntryMessage message =
+                    new EntryTask(getApplicationContext())
+                    .execute(new EntryMessage(new HardCodedTestEntries().getEntries(false)))
+                    .get();
+
+            if(!message.isError()) {
+                //Toast.makeText(getApplicationContext(), "DataBase has been initialized", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+        catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "DataBase initialization failed", Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
+
+    private void setUpDataBase() {
+
+        try {
+            UpdateMessage updateMessage =
+                    new UpdateTask(getApplicationContext())
+                    .execute(new UpdateMessage(UpdateMessage.UPDATEMESSAGE_UTILTYPE_COUNT)).get();
+
+            if(!updateMessage.isError()) {
+                //Toast.makeText(getApplicationContext(), "DataBase is Empty", Toast.LENGTH_SHORT).show();
+                createTestEntries();
+                return;
+            }
+
+            //Toast.makeText(getApplicationContext(), "DataBase is not Empty", Toast.LENGTH_SHORT).show();
+
+        }
+        catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "setUpDataBase Async task failed", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    private void setUpService() {
+
+        ActivityManager manager = (ActivityManager) this.getSystemService(Context.ACTIVITY_SERVICE);
+        for(ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if(AppService.class.getName().equals(service.service.getClassName())) {
+                return;
+            }
+        }
+
+        startService(new Intent(this, AppService.class));
+    }
+
 }

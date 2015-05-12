@@ -19,7 +19,8 @@ public class ServiceRestarter extends BroadcastReceiver {
         PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         PowerManager.WakeLock w1 = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "AppService");
 
-        /// Implementation
+        context.stopService(new Intent(context, AppService.class));
+        context.startService(new Intent(context, AppService.class));
 
         w1.release();
     }
@@ -31,14 +32,15 @@ public class ServiceRestarter extends BroadcastReceiver {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 
         // Calculate time to next restart (00:00:00)
+        // TODO : Test if it really does what its suppose to
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH));
+        calendar.add(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH)+1);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
 
-        long timeTilMidnight = (calendar.getTimeInMillis() - System.currentTimeMillis());
+        long timeTilMidnight = Math.abs(calendar.getTimeInMillis() - System.currentTimeMillis());
 
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeTilMidnight, 1000 * 60 * 60 * 24, pendingIntent);
     }

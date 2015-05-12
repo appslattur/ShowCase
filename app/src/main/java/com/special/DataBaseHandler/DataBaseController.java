@@ -548,7 +548,7 @@ public class DataBaseController {
 
     private IterableStamp fetchRadarFS(Cursor cursor) {
 
-        if(cursor.getInt(4) == 1) {
+        if(cursor.getInt(6) == 1) {
 
             Cursor tSCursor = fetchTimeStamps(cursor.getInt(0));
 
@@ -556,7 +556,7 @@ public class DataBaseController {
                     cursor.getString(1),
                     cursor.getString(2),
                     cursor.getString(3),
-                    cursor.getInt(4),
+                    cursor.getInt(10),
                     tSCursor.getString(0),
                     tSCursor.getString(1));
 
@@ -569,7 +569,7 @@ public class DataBaseController {
                 cursor.getString(1),
                 cursor.getString(2),
                 cursor.getString(3),
-                cursor.getInt(4),
+                cursor.getInt(10),
                 false);
     }
 
@@ -596,9 +596,9 @@ public class DataBaseController {
 
         Cursor cursorFS = db.query(
                 DataBaseHelper.FS_TABLE_NAME,
-                new String[] {},
-                FS_allColumns[0] + " = ? AND " +
-                        FS_allColumns[0] + " = ?",
+                FS_allColumns,
+                FS_allColumns[9] + " = ? AND " +
+                        FS_allColumns[5] + " = ?",
                 new String[] { 1+"", "General" },
                 null,
                 null,
