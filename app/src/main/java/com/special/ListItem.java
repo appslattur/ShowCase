@@ -1,16 +1,20 @@
 package com.special;
 
+import com.special.ServiceImp.Util.StampExplainer;
+
 public class ListItem {
 	private int imageId;
 	private String title;
 	private String desc;
     private int id;
+    private StampExplainer stamp;
 	
-	public ListItem(int imageId, String title, String desc, int id) {
+	public ListItem(int imageId, String title, String desc, int id, StampExplainer s) {
 		this.imageId = imageId;
 		this.title = title;
 		this.desc = desc;
 		this.id = id;
+        this.stamp = s;
 	}
 	/*
 	List item þarf að hegða sér eins og Veitingastaður
@@ -36,6 +40,9 @@ public class ListItem {
 	}
     public int getId(){
         return this.id;
+    }
+    public StampExplainer getStamp(){
+        return this.stamp;
     }
 
 	@Override

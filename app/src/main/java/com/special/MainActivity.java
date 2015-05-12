@@ -1,5 +1,6 @@
 package com.special;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -7,6 +8,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.special.DataBaseHandler.AsyncTasks.EntryTask;
+import com.special.DataStorage.Messages.EntryMessage;
+import com.special.ServiceImp.ServiceHandler.AppService;
+import com.special.ServiceImp.Util.HardCodedTestEntries;
 import com.special.appslattur.DatabaseHelper.TestHandler;
 import com.special.menu.ResideMenu;
 import com.special.menu.ResideMenuItem;
@@ -22,7 +27,28 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUpMenu();
-        changeFragment(new HomeFragment());
+
+        try {
+            EntryMessage yolo = new EntryTask(getApplicationContext()).execute(new EntryMessage(new HardCodedTestEntries().getEntries(false))).get();
+        }
+        catch (Exception e) {
+            // Do Nothing
+        }
+
+        boolean isSpecial = false;
+        try{
+            Bundle b = getIntent().getExtras();
+            isSpecial = b.getBoolean("isSpecialCase");
+        }catch (Exception e){
+            //error handling
+        }
+        if(isSpecial){
+            changeFragment(new TransitionListFragment());
+        }else {
+            changeFragment(new HomeFragment());
+
+        }
+
         TestHandler.initHandler(getBaseContext());
     }
 
@@ -44,6 +70,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         //Þetta verður listi með okkar afsláttum
         afslaettirList = new ResideMenuItem(this, R.drawable.ic_list_1, "Afslættir");
+
+        /*
+        Setja upp notification test case
+         */
+        startService(new Intent(this, AppService.class));
 
         itemHome.setOnClickListener(this);
         //itemElements.setOnClickListener(this);
