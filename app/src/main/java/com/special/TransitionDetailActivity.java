@@ -111,7 +111,7 @@ public class TransitionDetailActivity extends Activity {
         String sum = "";
         try {
             Bundle bundle = getIntent().getExtras();
-            Toast.makeText(getApplicationContext(), "isNotification is : " + bundle.getBoolean("isNotification"), Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "isNotification is : " + bundle.getBoolean("isNotification"), Toast.LENGTH_LONG).show();
             StampParty party = (StampParty) bundle.getSerializable("Stamp");
             title = party.getStampList().get(0).getName();
             sum = party.getStampList().get(0).getShortDescription();

@@ -47,6 +47,7 @@ public class AppService extends Service implements AppInterface {
 
     ///
     // AppService activity communication variables
+    // Old
     ///
     /*
     public static final String HANDLER_NAME = "Whisper";
@@ -66,6 +67,9 @@ public class AppService extends Service implements AppInterface {
 
     }
     */
+
+    // New
+    // TODO : Figure out why callBack returns null on bind
 
     public final IBinder iBinder = new AppServiceBinder(this);
 
@@ -96,9 +100,9 @@ public class AppService extends Service implements AppInterface {
 
         hasBeenInitialized = false;
         // TODO : Check if this breaks thingies
-        //super.onCreate();
+
         /*
-        ////// see to-do above
+        // Simple implementation of a communication thread, depricated
         HandlerThread thread = new HandlerThread(HANDLER_NAME, android.os.Process.THREAD_PRIORITY_BACKGROUND);
         thread.start();
         Looper serviceLooper = thread.getLooper();
@@ -151,6 +155,7 @@ public class AppService extends Service implements AppInterface {
         try {
             radarInitialization();
             notificationHandlerInitialization();
+            hasBeenInitialized = true;
             if(debug) Log.d("AppService",  "initialization successful");
         }
         catch (Exception e) {

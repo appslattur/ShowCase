@@ -90,7 +90,7 @@ public class NotificationHandler implements AppInterface {
     ///
 
     private void manageInitialization() {
-        tickTackCounter = new TickTackCounter(this, 1000*40, System.currentTimeMillis(), true);
+        tickTackCounter = new TickTackCounter(this, 1000*60*15, System.currentTimeMillis(), true);
         notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         isActive = false;

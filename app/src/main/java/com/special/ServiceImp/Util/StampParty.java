@@ -15,7 +15,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Created by arnarjons on 10.5.2015.
+ * @author Mani Elmarsson
+ * @version 0.1
  */
 public class StampParty implements Serializable {
 
@@ -58,18 +59,18 @@ public class StampParty implements Serializable {
                     .execute(new IterableMessage()).get();
 
             if(message.isError()) {
-                Toast.makeText(context, "Something went horribly wrong", Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, "Something went horribly wrong", Toast.LENGTH_LONG).show();
             }
 
             if(message.getStamps() == null) {
-                Toast.makeText(context, "Stamps are null", Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, "Stamps are null", Toast.LENGTH_LONG).show();
             }
 
             for(IterableStamp stamp : message.getStamps()) {
                 addStamp(new StampExplainer(stamp));
             }
 
-            Toast.makeText(context, "Everything went right", Toast.LENGTH_LONG).show();
+            //Toast.makeText(context, "Everything went right", Toast.LENGTH_LONG).show();
         }
         catch (Exception e) {
             Toast.makeText(context, "It broke", Toast.LENGTH_LONG).show();

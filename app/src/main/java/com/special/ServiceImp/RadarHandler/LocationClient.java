@@ -14,9 +14,7 @@ import com.special.ServiceImp.Interfaces.AppInterface;
 
 /**
  * @author Arnar Jonsson
- * @since 3.5.2015
  * @version 0.2
- * Original class created ..
  *
  * LocationClient.class
  *

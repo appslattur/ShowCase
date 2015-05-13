@@ -8,8 +8,6 @@ import java.io.Serializable;
 /**
  * @author Arnar Jonsson
  * @version  0.3
- * @since ..
- * Originally created by Arnar Jonsson on ..
  *
  * DataStamp - A parent class that handles data insertion, extraction and updates for the
  * in-app application database.

@@ -13,10 +13,8 @@ import com.special.ServiceImp.Interfaces.AppInterface;
 import java.util.ArrayList;
 
 /**
- * @author Arnar Jonsson
+ * @author Ari Freyr, Arnar Jonsson
  * @version 0.3
- * @since ..
- * Originally created .. Ari Freyr, Arnar
  *
  * Radar.class
  * Receives location updates from a private LocationClient and checks them against possible location hits.
@@ -56,7 +54,7 @@ public class Radar implements AppInterface {
         this.debug = debug;
         this.context = context;
         this.callBack = callBack;
-        this.locationClient = new LocationClient(context, this, 1000*60, 1000*30, debug);
+        this.locationClient = new LocationClient(context, this, 1000*60*2, 1000*60, debug);
 
         if(debug) log("Radar - constructor call");
     }
@@ -99,8 +97,8 @@ public class Radar implements AppInterface {
 
 
     private boolean isHit(IterableStamp stamp, Location loc) {
-
-
+        /*
+        // Distance calculated by hand
         double eRad = 6371;
         double vLat = Math.toRadians(stamp.getLatitude()-loc.getLatitude());
         double vLon = Math.toRadians(stamp.getLongitude()-loc.getLongitude());
@@ -114,26 +112,30 @@ public class Radar implements AppInterface {
 
         double distance = eRad * cr;
 
-        Log.d("Distance", distance+"");
+        Log.d("Distance", stamp.getName() + " " +distance+"");
+
+        // TODO : fix when pingRadius bug is found
+        if(distance < 100) return true;
 
         return false;
-        /*
-        //Log.d("Coordenance??", "LAT IS " + loc.getLatitude() + "LON IS " + loc.getLongitude());
+        */
 
-        if(distance < 15) return true;
+        // Distance calculated by two Location objects
 
-        /*
         Location stampLocation = new Location("StampLoc");
         stampLocation.setLatitude(stamp.getLatitude());
         stampLocation.setLongitude(stamp.getLongitude());
 
         if(stamp.getName().equals("Home")) {
-            Log.d("Radar", "distance to home is : " + loc.distanceTo(stampLocation));
-            Log.d("Radar", "pingradius of home is : " + stamp.getPingRadius());
+            //Log.d("Radar", "distance to home is : " + loc.distanceTo(stampLocation));
+            //Log.d("Radar", "pingradius of home is : " + stamp.getPingRadius());
         }
-        if(stamp.getLatitude() != 0.0) Log.d("Distance", "dist is :" + loc.distanceTo(stampLocation));
-        if(loc.distanceTo(stampLocation) < 25) return true;
-        */
+        if(stamp.getLatitude() != 0.0) Log.d("Distance", "dist is :" + loc.distanceTo(stampLocation) + " | " + stamp.getName());
+        if(loc.distanceTo(stampLocation) < 80) return true;
+
+        return false;
+
+        // Distance calculated by a static Location object function
         /*
         float[] results = new float[1];
         Location.distanceBetween(loc.getLatitude(), loc.getLongitude(),
@@ -144,18 +146,6 @@ public class Radar implements AppInterface {
             return true;
         }
 
-        return false;
-        */
-        /*
-        Location a = new Location("a");
-        a.setLatitude(stamp.getLatitude());
-        a.setLongitude(stamp.getLongitude());
-
-        Location b = new Location("b");
-        b.setLatitude(loc.getLatitude());
-        b.setLongitude(loc.getLongitude());
-
-        Log.d("Distance", a.distanceTo(b)+"");
         return false;
         */
     }
@@ -169,18 +159,15 @@ public class Radar implements AppInterface {
 
 
         for(IterableStamp stamp : stamps) {
-            //callBack.onNotificationRequest(stamp);
-            if(!stamp.isMall()) callBack.onNotificationRequest(stamp);
             if(isHit(stamp, loc)) {
                 //Log.d("Radar", "Hit found on IterableStamp - " + stamp.getType() + " - " + stamp.getId());
                 //Log.d("Radar", "Hit found on IterableStamp - Stamp length is :" +stamps.length);
                 callBack.onNotificationRequest(stamp);
-                return;
             }
 
         }
 
-        if(this.debug) Log.d("Radar",  "iterateIterables - no hit found");
+        //if(this.debug) Log.d("Radar",  "iterateIterables - no hit found");
 
     }
 
@@ -191,7 +178,7 @@ public class Radar implements AppInterface {
 
             if(message != null && !message.isError()) {
                 stamps = message.getStamps();
-                Toast.makeText(context, "Stamp size is : " + stamps.length, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "Stamp size is : " + stamps.length, Toast.LENGTH_SHORT).show();
                 if(this.debug) Log.d("Radar", "populateStamps - success");
                 return;
             }

@@ -3,7 +3,8 @@ package com.special.ServiceImp.Util;
 import com.special.DataStorage.Instances.EntryStamp;
 
 /**
- * Created by arnarjons on 9.5.2015.
+ * @author Mani Elmarsson, Arnar Jonsson
+ * @version 0.2
  */
 public class HardCodedTestEntries {
 
@@ -20,9 +21,9 @@ public class HardCodedTestEntries {
         ///
         EntryStamp TGMall = new EntryStamp(
                 FSMGID++,
-                64.1393411,
-                -21.9555124,
-                "TaekniGardurMall",
+                64.13953557237824,
+                -21.955277295783162,
+                "TaekniGardur",
                 true,
                 1
         );
@@ -33,7 +34,7 @@ public class HardCodedTestEntries {
                 0.0,
                 "TGStofa1",
                 "StudentaKort",
-                "TaekniGardurMall",
+                "TaekniGardur",
                 false,
                 "StofaLongDesc",
                 "StofaShortDesc",
@@ -47,7 +48,7 @@ public class HardCodedTestEntries {
                 0.0,
                 "TGStofa2",
                 "StudentaKort",
-                "TaekniGardurMall",
+                "TaekniGardur",
                 false,
                 "StofaLongDesc",
                 "StofaShortDesc",
@@ -60,7 +61,7 @@ public class HardCodedTestEntries {
                 0.0,
                 "TGStofa3",
                 "StudentaKort",
-                "TaekniGardurMall",
+                "TaekniGardur",
                 false,
                 "StofaLongDesc",
                 "StofaShortDesc",
@@ -73,7 +74,7 @@ public class HardCodedTestEntries {
                 0.0,
                 "TGStofa4",
                 "StudentaKort",
-                "TaekniGardurMall",
+                "TaekniGardur",
                 false,
                 "StofaLongDesc",
                 "StofaShortDesc",
@@ -86,7 +87,7 @@ public class HardCodedTestEntries {
                 0.0,
                 "TGStofa5",
                 "StudentaKort",
-                "TaekniGardurMall",
+                "TaekniGardur",
                 false,
                 "StofaLongDesc",
                 "StofaShortDesc",
@@ -96,9 +97,9 @@ public class HardCodedTestEntries {
 
         EntryStamp TGENTRYReal = new EntryStamp(
                 FSID++,
-                64.1392495,
-                -21.9556018,
-                "TGStoraStofa",
+                64.13953557237824,
+                -21.955277295783162,
+                "MalmquistSkrifstofa",
                 "StudentaKort",
                 "General",
                 false,
@@ -115,8 +116,8 @@ public class HardCodedTestEntries {
 
         EntryStamp ArnarMall = new EntryStamp(
                 FSMGID++,
-                0.0,
-                0.0,
+                64.1348028083071,
+                -21.949451537802815,
                 "ArnarMall",
                 true,
                 1
@@ -124,8 +125,8 @@ public class HardCodedTestEntries {
 
         EntryStamp ArnarNonMall = new EntryStamp(
                 FSID++,
-                0.0,
-                0.0,
+                64.1348028083071,
+                -21.949451537802815,
                 "ArnarNonMall",
                 "Kort",
                 "General",

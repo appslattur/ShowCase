@@ -4,7 +4,7 @@ import java.text.DateFormat;
 import java.util.Date;
 
 /**
- * Created by arnarjons on 8.5.2015.
+ * bla?
  */
 public class LogPostFix {
 

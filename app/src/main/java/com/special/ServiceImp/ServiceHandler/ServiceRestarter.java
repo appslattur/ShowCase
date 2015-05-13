@@ -10,7 +10,8 @@ import android.os.PowerManager;
 import java.util.Calendar;
 
 /**
- * Created by arnarjons on 12.5.2015.
+ * @author Arnar Jonsson
+ * @version 0.1
  */
 public class ServiceRestarter extends BroadcastReceiver {
 
