@@ -15,8 +15,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * @author Mani Elmarsson
- * @version 0.1
+ * 
  */
 public class StampParty implements Serializable {
 

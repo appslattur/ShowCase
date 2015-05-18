@@ -1,11 +1,10 @@
 package com.special.DataStorage.Messages;
 
 /**
- * @author Arnar Jonsson
- * @version 0.2
- *
  * UpdateMessage
- * Update and utility message for the in-app database
+ *
+ * Parameter and return value of UpdateTask.
+ * Handles data updates and other utility functions for the in-app database
  */
 public class UpdateMessage {
 

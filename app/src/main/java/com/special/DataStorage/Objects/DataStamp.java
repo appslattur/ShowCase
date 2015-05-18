@@ -6,8 +6,6 @@ import android.util.Log;
 import java.io.Serializable;
 
 /**
- * @author Arnar Jonsson
- * @version  0.3
  *
  * DataStamp - A parent class that handles data insertion, extraction and updates for the
  * in-app application database.

@@ -3,8 +3,10 @@ package com.special.DataStorage.Instances;
 import com.special.DataStorage.Objects.DataStamp;
 
 /**
- * @author Arnar Jonsson
- * @version 0.2
+ * IterableStamp
+ *
+ * Child of DataStamp
+ * Contains data needed for special cases (each case has its own IterableStamp)
  *
  */
 public class IterableStamp extends DataStamp {

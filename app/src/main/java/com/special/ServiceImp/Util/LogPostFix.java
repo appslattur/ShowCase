@@ -4,7 +4,10 @@ import java.text.DateFormat;
 import java.util.Date;
 
 /**
- * bla?
+ * LogPostFix
+ *
+ * Sticks a timestamp at the end of a string
+ * Used for logging purposes
  */
 public class LogPostFix {
 

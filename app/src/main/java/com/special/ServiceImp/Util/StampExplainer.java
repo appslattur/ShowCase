@@ -11,9 +11,7 @@ import com.special.DataStorage.Objects.DataStamp;
 import java.io.Serializable;
 
 /**
- * @author Ari Freyr Gudmundsson
- * @version 0.1
- * @since  on 10.5.2015.
+ *
  */
 public class StampExplainer implements Stamp, Serializable {
 

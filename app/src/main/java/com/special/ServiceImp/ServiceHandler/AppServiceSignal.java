@@ -9,11 +9,10 @@ import android.os.IBinder;
 import com.special.ServiceImp.Interfaces.AppInterface;
 
 /**
- * @author Arnar Jonsson
- * @version 0.1
- * @since ..
- * Originally created on ..
+ * AppServiceSignal
  *
+ * Used to notify the main service concerning changes in the application (Database related or
+ * otherwise)
  *
  */
 // TODO : Does not work atm

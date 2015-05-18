@@ -1,10 +1,6 @@
 package com.special.ServiceImp.Util;
 
 /**
- * @author Ari Freyr Gudmundsson
- * @version 0.1
- * @since 10.5.2015.
- *
  * Available info in the DataStamps that you (Ari) cares about :
  *
  * id

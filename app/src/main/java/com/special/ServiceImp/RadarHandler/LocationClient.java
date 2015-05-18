@@ -13,9 +13,6 @@ import com.google.android.gms.location.LocationServices;
 import com.special.ServiceImp.Interfaces.AppInterface;
 
 /**
- * @author Arnar Jonsson
- * @version 0.2
- *
  * LocationClient.class
  *
  * Holds a GoogleApiServices location object and the logic needed to request updates on a time

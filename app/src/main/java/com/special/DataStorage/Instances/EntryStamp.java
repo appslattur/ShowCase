@@ -3,8 +3,10 @@ package com.special.DataStorage.Instances;
 import com.special.DataStorage.Objects.DataStamp;
 
 /**
- * @author Arnar Jonsson
- * @version 0.2
+ * EntryStamp
+ *
+ * Child of DataStamp
+ * Contains everything needed for insertion of data into the in-app database
  *
  */
 public class EntryStamp extends DataStamp {

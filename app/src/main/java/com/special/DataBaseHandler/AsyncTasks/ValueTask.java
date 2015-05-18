@@ -9,9 +9,6 @@ import com.special.DataStorage.Messages.ValueMessage;
 import java.sql.SQLException;
 
 /**
- * @author Arnar Jonsson
- * @version 0.2
- *
  * ValueTask
  * Handles simple extractions
  */

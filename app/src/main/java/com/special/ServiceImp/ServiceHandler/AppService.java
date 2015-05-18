@@ -16,9 +16,9 @@ import com.special.ServiceImp.Util.LogPostFix;
 import java.util.ArrayList;
 
 /**
- * @author Arnar Jonsson
- * @version 0.1
- * @since 1.5.2015.
+ * AppService
+ *
+ * Handles computation for the application?
  */
 public class AppService extends Service implements AppInterface {
 

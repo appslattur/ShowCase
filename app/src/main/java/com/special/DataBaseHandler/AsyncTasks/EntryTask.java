@@ -9,9 +9,6 @@ import com.special.DataStorage.Messages.EntryMessage;
 import java.sql.SQLException;
 
 /**
- * @author Arnar Jonsson
- * @version 0.5
- *
  * EntryTask
  * Handles insertion of DataStamps into the in-app Database
  */

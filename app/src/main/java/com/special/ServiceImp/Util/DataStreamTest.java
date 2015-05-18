@@ -13,8 +13,7 @@ import com.special.DataStorage.Messages.ValueMessage;
 import com.special.DataStorage.Objects.DataStamp;
 
 /**
- * @author Mani Elmarsson, Arnar Jonsson
- * @version 0.2
+ * Simple tester
  */
 public class DataStreamTest {
 

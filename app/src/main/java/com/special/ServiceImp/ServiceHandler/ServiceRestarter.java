@@ -10,8 +10,9 @@ import android.os.PowerManager;
 import java.util.Calendar;
 
 /**
- * @author Arnar Jonsson
- * @version 0.1
+ * ServiceRestarter
+ *
+ * Restarts the main service every 24 hours
  */
 public class ServiceRestarter extends BroadcastReceiver {
 

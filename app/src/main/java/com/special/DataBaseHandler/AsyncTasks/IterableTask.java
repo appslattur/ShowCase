@@ -9,9 +9,6 @@ import com.special.DataStorage.Messages.IterableMessage;
 import java.sql.SQLException;
 
 /**
- * @author Arnar Jonsson
- * @version 0.2
- *
  * IterableTask
  * Handles data destined for viewing (front end?)
  */

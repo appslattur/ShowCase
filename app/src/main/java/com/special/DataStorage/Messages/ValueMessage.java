@@ -3,11 +3,10 @@ package com.special.DataStorage.Messages;
 import com.special.DataStorage.Instances.ValueStamp;
 
 /**
- * @author Arnar Jonsson
- * @version 0.2
- *
  * ValueMessage
- * Extraction message for the in-app database
+ *
+ * Parameter and return value of ValueTask.
+ * Handles data extraction for the in-app database
  */
 public class ValueMessage {
     ///

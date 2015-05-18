@@ -27,9 +27,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * @author Arnar Jonsson, Ari Freyr
- * @version 0.3
- *
  * NotificationHandler
  * Handles notifications for the application
  * Houses an queue that stores newly fired notifications so the user

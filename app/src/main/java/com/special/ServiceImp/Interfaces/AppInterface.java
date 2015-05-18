@@ -7,10 +7,6 @@ import com.special.DataStorage.Instances.IterableStamp;
 import java.util.ArrayList;
 
 /**
- * @author Arnar Jonsson
- * @version 0.1
- * @since 1.5.2015
- *
  * AppInterface.class
  *
  * Handles message calls within AppService.class

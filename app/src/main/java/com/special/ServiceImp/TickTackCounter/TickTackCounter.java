@@ -3,12 +3,8 @@ package com.special.ServiceImp.TickTackCounter;
 import com.special.ServiceImp.Interfaces.AppInterface;
 
 /**
- * @author Arnar Jonsson
- * @version 0.5
- * @since ..
- * Originally created .. Arnar Jonsson
- *
  * TickTackCounter.class
+ *
  * Stores timestamps corresponding to created notification id.
  * When called it iterates through these timestamps to check if any have expired, otherwise
  * it does not care about anything?

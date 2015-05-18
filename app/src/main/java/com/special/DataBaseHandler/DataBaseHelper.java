@@ -5,10 +5,19 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * @author Ari Freyr
- * @version 0.5
+ * DataBaseHelper
+ *
+ * The in-app database
+ *
+ * Contains 3 tables
+ * Table FS - each row contains details about discounts and where they are to be had
+ * Table FSTS - timeStamps for specific rows in the FS table (if a discount is only available
+ *      at a certain time)
+ * Table FSMG - each row contain details about "group" locations, such as malls and markets
+ *
  */
 public class DataBaseHelper extends SQLiteOpenHelper {
+
     // DATABASE NAME AND INITIAL VERSION
     private static final String DATABASE_NAME = "AppslatturDB.db";
     private static final int DATABASE_VERSION = 1;

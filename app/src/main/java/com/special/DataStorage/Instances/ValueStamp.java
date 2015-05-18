@@ -3,8 +3,10 @@ package com.special.DataStorage.Instances;
 import com.special.DataStorage.Objects.DataStamp;
 
 /**
- * @author Arnar Jonsson
- * @version 0.2
+ * ValueStamp
+ *
+ * Child of DataStamp
+ * Contains everything needed for data extraction from the in-app database
  *
  */
 public class ValueStamp extends DataStamp {

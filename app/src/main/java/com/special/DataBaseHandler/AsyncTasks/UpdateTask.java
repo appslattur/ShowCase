@@ -9,9 +9,6 @@ import com.special.DataStorage.Messages.UpdateMessage;
 import java.sql.SQLException;
 
 /**
- * @author Arnar Jonsson
- * @version 0.2
- *
  * UpdateTask
  * Handles database updates and other utility tasks
  */

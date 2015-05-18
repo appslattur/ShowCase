@@ -13,9 +13,6 @@ import com.special.ServiceImp.Interfaces.AppInterface;
 import java.util.ArrayList;
 
 /**
- * @author Ari Freyr, Arnar Jonsson
- * @version 0.3
- *
  * Radar.class
  * Receives location updates from a private LocationClient and checks them against possible location hits.
  * Returns the callback to AppService.class for potential notification display and/or logging

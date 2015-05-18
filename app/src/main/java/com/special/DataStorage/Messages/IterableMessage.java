@@ -3,11 +3,10 @@ package com.special.DataStorage.Messages;
 import com.special.DataStorage.Instances.IterableStamp;
 
 /**
- * @author Arnar Jonsson
- * @version 0.2
- *
  * IterableMessage
- * Specific extraction messages for the in-app database
+ *
+ * Parameter and return value of IterableTask.
+ * Handles special data extraction from the in-app database
  */
 public class IterableMessage {
 

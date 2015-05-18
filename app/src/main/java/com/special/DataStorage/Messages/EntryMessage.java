@@ -3,11 +3,11 @@ package com.special.DataStorage.Messages;
 import com.special.DataStorage.Instances.EntryStamp;
 
 /**
- * @author Arnar Jonsson
- * @version 0.2
- *
  * EntryMessage
- * Insertion message for the in-app database
+ *
+ * Parameter and return value of EntryTask.
+ * Handles data insertion in the in-app database
+ *
  */
 public class EntryMessage {
 

@@ -3,8 +3,7 @@ package com.special.ServiceImp.Util;
 import com.special.DataStorage.Instances.EntryStamp;
 
 /**
- * @author Mani Elmarsson, Arnar Jonsson
- * @version 0.2
+ * Simple tester
  */
 public class HardCodedTestEntries {
 

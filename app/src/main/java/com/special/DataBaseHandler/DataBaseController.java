@@ -17,8 +17,9 @@ import com.special.DataStorage.Objects.DataStamp;
 import java.sql.SQLException;
 
 /**
- * @author Arnar Jonsson
- * @version 0.4
+ * DataBaseController
+ *
+ * Handles logic and utility functions for the in-app database DataBaseHelper.class
  */
 public class DataBaseController {
 
